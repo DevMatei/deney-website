@@ -113,7 +113,7 @@ export function HomePage() {
 
       <section className="px-4 md:px-10 pt-10 md:pt-14 pb-10 w-full max-w-[1080px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-4">
-          <Card className="md:row-span-2" innerClassName="!p-8 md:flex md:flex-col">
+          <Card className="md:row-span-2" innerClassName="!p-8 md:flex md:flex-col md:h-full md:justify-center">
             <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60">
               {content.home.aboutPreview.label}
             </div>
@@ -122,7 +122,7 @@ export function HomePage() {
             </p>
             <button
               type="button"
-              className="m3-button-outlined !px-5 !py-2.5 mt-6 md:mt-auto text-sm"
+              className="m3-button-outlined !px-5 !py-2.5 mt-6 text-sm"
               onClick={() => navigate("/about")}
             >
               {content.home.aboutPreview.cta}
