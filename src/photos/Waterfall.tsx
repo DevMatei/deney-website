@@ -6,6 +6,7 @@ const DURATION_SPREAD = 6;
 const GRID_PADDING = 16;
 const COLUMN_GAP = 6;
 const PHOTO_MARGIN = 6;
+const MIN_PHOTOS_PER_COLUMN = 4;
 const MAX_PHOTOS_PER_COLUMN = 12;
 const MAX_COLUMNS = 8;
 
@@ -58,12 +59,14 @@ function photoHeight(photo: Photo, columnWidth: number): number {
 }
 
 function sampleColumn(pool: Photo[], columnWidth: number, targetHeight: number): Photo[] {
-  const order = shuffled(pool);
   const result: Photo[] = [];
   let total = 0;
   let index = 0;
-  while (total < targetHeight && result.length < MAX_PHOTOS_PER_COLUMN) {
-    const photo = order[index % order.length];
+  while (
+    (total < targetHeight || result.length < MIN_PHOTOS_PER_COLUMN) &&
+    result.length < MAX_PHOTOS_PER_COLUMN
+  ) {
+    const photo = pool[index % pool.length];
     index += 1;
     result.push(photo);
     total += photoHeight(photo, columnWidth);
