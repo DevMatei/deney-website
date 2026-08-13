@@ -44,7 +44,12 @@ export function AboutPage() {
         ))}
       </div>
 
-      <PhotoModal photo={selected} onClose={() => setSelected(null)} />
+      <PhotoModal
+        photos={photos}
+        photo={selected}
+        onSelect={setSelected}
+        onClose={() => setSelected(null)}
+      />
     </div>
   );
 }

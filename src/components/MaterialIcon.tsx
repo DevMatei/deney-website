@@ -63,6 +63,7 @@ export const Mail = materialIcon("mail");
 export const ChevronLeft = materialIcon("chevron_left");
 export const ChevronRight = materialIcon("chevron_right");
 export const ArrowUp = materialIcon("arrow_upward");
+export const ArrowLeft = materialIcon("arrow_back");
 export const ArrowRight = materialIcon("arrow_forward");
 export const Copy = materialIcon("content_copy");
 export const Check = materialIcon("check");
