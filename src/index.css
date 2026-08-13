@@ -4,6 +4,7 @@
   font-family: "Google Sans Flex";
   font-style: normal;
   font-weight: 1 1000;
+  font-stretch: 25% 151%;
   font-display: swap;
   src: url("/fonts/google-sans-flex-latin.woff2") format("woff2-variations");
 }
