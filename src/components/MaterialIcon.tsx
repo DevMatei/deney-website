@@ -2,6 +2,7 @@ import {
   ArrowLeft as LucideArrowLeft,
   ArrowRight as LucideArrowRight,
   ArrowUp as LucideArrowUp,
+  Calendar as LucideCalendar,
   Camera as LucideCamera,
   Check as LucideCheck,
   ChevronLeft as LucideChevronLeft,
@@ -35,6 +36,7 @@ const GLYPHS: Record<string, LucideIcon> = {
   arrow_upward: LucideArrowUp,
   arrow_forward: LucideArrowRight,
   arrow_back: LucideArrowLeft,
+  calendar: LucideCalendar,
   content_copy: LucideCopy,
   check: LucideCheck,
   light_mode: LucideSun,
@@ -65,6 +67,7 @@ export const ChevronRight = materialIcon("chevron_right");
 export const ArrowUp = materialIcon("arrow_upward");
 export const ArrowLeft = materialIcon("arrow_back");
 export const ArrowRight = materialIcon("arrow_forward");
+export const Calendar = materialIcon("calendar");
 export const Copy = materialIcon("content_copy");
 export const Check = materialIcon("check");
 export const Sun = materialIcon("light_mode");

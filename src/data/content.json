@@ -25,7 +25,7 @@
     "hero": {
       "eyebrow": "Photography",
       "title": "deney",
-      "tagline": "Chasing light, one frame at a time",
+      "tagline": "walks around, takes photos",
       "primaryCta": "View photos",
       "secondaryCta": "About deney"
     },
@@ -34,43 +34,43 @@
     "featuredEmpty": "Photo coming soon",
     "aboutPreview": {
       "label": "About deney",
-      "body": "deney shoots the quiet moments: winter streets under streetlights, empty courtyards, fog, and light breaking through bare branches. The full gallery lives on the Photos page, and a proper introduction is on its way.",
+      "body": "no real theme here, just whatever looked good that day. more on the about page if you're curious",
       "cta": "Read more"
     }
   },
   "photos": {
     "eyebrow": "Gallery",
     "title": "Photos",
-    "description": "The full gallery. Click any photo for a closer look.",
+    "description": "the full gallery, click any photo for a closer look",
     "countSuffix": "photos in the gallery",
     "endCard": {
-      "title": "That's all for now",
-      "body": "New photos are added over time.",
+      "title": "that's all for now",
+      "body": "new photos get added when there's new photos",
       "button": "Back to top"
     },
-    "empty": "Photos will appear here once they are added to src/assets/photos"
+    "empty": "photos will appear here once they're added"
   },
   "about": {
     "eyebrow": "Info",
     "title": "About",
-    "description": "How the photos happen: walks, available light, and bad weather.",
-    "quote": "One camera and a walk until something looks right.",
-    "intro": "deney is a photographer drawn to available light and late hours: snow-lit streets, buildings with warm windows, sunsets through branches, and quiet harbors. No heavy setups, no studio tricks. One camera and a walk until something looks right.",
+    "description": "how the photos happen",
+    "quote": "i just walk around and take pictures of stuff that looks good",
+    "intro": "deney is a photographer without a specific theme or plan, just someone who explores the city and takes photos of whatever catches his eye. no concept, no setup, no overthinking it",
     "sections": [
       {
-        "heading": "Style",
-        "body": "Mostly dark scenes with a single strong light source, weather in the frame, and compositions that let the scene breathe. The work is moody rather than polished, and the mood comes from what the light is doing, not from editing."
+        "heading": "Process",
+        "body": "walk around, see something worth shooting, take the photo. if it looks good it ends up here"
       },
       {
-        "heading": "What deney shoots",
-        "body": "Night streets in winter, fog and snow, empty courtyards, old buildings with lit windows, sunsets over hills, and harbors at first light. If the weather is bad, that is usually the best time to go out."
+        "heading": "Why",
+        "body": "no deep reason behind it, it's just something to do while out. some shots turn out better than others, this is the good ones"
       }
     ]
   },
   "contact": {
     "eyebrow": "Discord",
     "title": "Contact",
-    "description": "Discord is the only way to reach deney. The profile link only opens when you are signed in to Discord.",
+    "description": "Discord is the best way to reach deney. the profile link works best if you're already signed in",
     "handle": "@deney.cmd",
     "openButton": "Open Discord profile",
     "xUrl": "https://x.com/deney_lol",
@@ -79,12 +79,26 @@
     "discordUrl": "https://discord.com/users/1065304440694919178",
     "discordUserId": "1065304440694919178"
   },
+  "lightbox": {
+    "close": "Close",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "fullSize": "Full size",
+    "details": "Photo details",
+    "shotSettings": "Shot settings",
+    "fileInfo": "File",
+    "aperture": "Aperture",
+    "shutter": "Shutter speed",
+    "focalLength": "Focal length",
+    "iso": "ISO",
+    "dimensions": "Dimensions"
+  },
   "avatarAlt": "deney avatar",
   "footer": {
     "navigationLabel": "Navigation",
     "contactLabel": "Contact",
     "backToTop": "Back to top",
-    "note": "A quiet photography portfolio, updated by hand."
+    "note": "a photography portfolio, updated whenever there's something new to add"
   },
   "photoAlt": "Photograph by deney"
 }

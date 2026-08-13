@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import type { Photo, PhotoMeta } from "../photos/usePhotos";
+import type { Photo } from "../photos/usePhotos";
 import {
   formatAperture,
   formatFocalLength,
   formatShutter,
   formatTakenAt,
 } from "../photos/formatExif";
-import { ArrowLeft, ArrowRight, X } from "./MaterialIcon";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Camera,
+  ExternalLink,
+  X,
+} from "./MaterialIcon";
+import content from "../data/content.json";
 
 export function PhotoModal({
   photos,
@@ -20,11 +28,25 @@ export function PhotoModal({
   onSelect: (photo: Photo) => void;
   onClose: () => void;
 }) {
+  const isOpen = photo !== null;
   const index = photo !== null ? photos.findIndex((p) => p.url === photo.url) : -1;
   const total = photos.length;
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openedFromRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (photo === null) return;
+    if (!isOpen) return;
+    openedFromRef.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = "";
+      openedFromRef.current?.focus();
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
       if (event.key === "ArrowRight" && total > 1) onSelect(photos[(index + 1) % total]);
@@ -32,72 +54,93 @@ export function PhotoModal({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [photo, index, total, photos, onSelect, onClose]);
+  }, [isOpen, index, total, photos, onSelect, onClose]);
+
+  useEffect(() => {
+    if (!isOpen || total < 2) return;
+    for (const delta of [-1, 1]) {
+      const adjacent = photos[(index + delta + total) % total];
+      if (adjacent !== undefined) {
+        const image = new Image();
+        image.src = adjacent.url;
+      }
+    }
+  }, [isOpen, index, total, photos]);
 
   const step = (delta: number) => {
-    if (total === 0 || photo === null) return;
+    if (photo === null || total === 0) return;
     onSelect(photos[(index + delta + total) % total]);
   };
 
   return (
     <AnimatePresence>
-      {photo !== null && (
+      {isOpen && photo !== null && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label={photo.alt}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-md"
+          transition={{ duration: 0.18 }}
+          className="fixed inset-0 z-[100] flex flex-col bg-black/85 backdrop-blur-md"
           onClick={onClose}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 16 }}
-            transition={{ type: "spring", stiffness: 380, damping: 32 }}
-            onClick={(event) => event.stopPropagation()}
-            className="w-full max-w-3xl rounded-[2rem] border-2 border-[var(--outline-variant)] bg-[var(--surface-container)] shadow-[0_40px_90px_-24px_rgba(0,0,0,0.7)] overflow-hidden"
-          >
-            <div className="flex items-center justify-between px-4 sm:px-5 pt-4 pb-2">
-              <div className="text-[11px] font-expressive font-black uppercase tracking-[0.18em] opacity-60">
-                {total > 0 ? `${index + 1} / ${total}` : ""}
-              </div>
-              <button
-                onClick={onClose}
-                aria-label="Close"
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--surface-variant)] text-[var(--on-surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-colors cursor-pointer"
-              >
-                <X size={20} />
-              </button>
+          <div className="flex items-center justify-between px-4 py-3 sm:px-6 shrink-0">
+            <span className="text-sm font-bold tabular-nums text-white/60">
+              {total > 0 ? `${index + 1} / ${total}` : ""}
+            </span>
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={onClose}
+              aria-label={content.lightbox.close}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4 px-4 pb-4 sm:px-6 sm:pb-6 lg:gap-6 lg:px-6">
+            <div
+              className="relative flex-1 min-h-0 flex items-center justify-center px-12 sm:px-20 lg:px-14"
+              onClick={(event) => event.stopPropagation()}
+            >
+              {total > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => step(-1)}
+                    aria-label={content.lightbox.previous}
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
+                  >
+                    <ArrowLeft size={22} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => step(1)}
+                    aria-label={content.lightbox.next}
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
+                  >
+                    <ArrowRight size={22} />
+                  </button>
+                </>
+              )}
+              <PhotoImage key={photo.url} photo={photo} />
             </div>
 
-            <div className="relative px-3 sm:px-5">
-              <div className="relative rounded-[1.5rem] overflow-hidden bg-black/30 flex items-center justify-center">
-                <PhotoImage key={photo.url} photo={photo} />
-                {total > 1 && (
-                  <>
-                    <button
-                      onClick={() => step(-1)}
-                      aria-label="Previous photo"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--surface)]/70 backdrop-blur text-[var(--on-surface)] hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-colors cursor-pointer"
-                    >
-                      <ArrowLeft size={20} />
-                    </button>
-                    <button
-                      onClick={() => step(1)}
-                      aria-label="Next photo"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--surface)]/70 backdrop-blur text-[var(--on-surface)] hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-colors cursor-pointer"
-                    >
-                      <ArrowRight size={20} />
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-
-            <div className="px-4 sm:px-5 py-4">
-              {photo.meta !== undefined && <MetaList meta={photo.meta} />}
-            </div>
-          </motion.div>
+            <motion.aside
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ type: "spring", stiffness: 380, damping: 34 }}
+              onClick={(event) => event.stopPropagation()}
+              aria-label={content.lightbox.details}
+              className="w-full lg:w-[340px] xl:w-[380px] shrink-0 overflow-y-auto rounded-2xl sm:rounded-3xl border border-[var(--outline-variant)]/60 bg-[var(--surface-container)] p-4 sm:p-5 shadow-2xl max-h-[32vh] lg:max-h-none"
+            >
+              <Details photo={photo} />
+            </motion.aside>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -109,54 +152,129 @@ function PhotoImage({ photo }: { photo: Photo }) {
   const meta = photo.meta;
 
   return (
-    <div className="relative w-full flex justify-center">
+    <div className="relative flex items-center justify-center max-h-full max-w-full">
       {meta?.blur !== undefined && (
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${meta.blur})`,
-            filter: "blur(24px) saturate(1.2)",
-            transform: "scale(1.2)",
+            filter: "blur(28px) saturate(1.2)",
+            transform: "scale(1.25)",
             opacity: loaded ? 0 : 1,
-            transition: "opacity 400ms ease",
+            transition: "opacity 350ms ease",
           }}
         />
       )}
-      <img
+      <motion.img
         src={photo.url}
         alt={photo.alt}
-        className="max-w-full max-h-[68vh] object-contain block relative"
-        style={{ opacity: loaded ? 1 : 0, transition: "opacity 300ms ease" }}
+        decoding="async"
+        draggable={false}
+        initial={{ opacity: 0, scale: 0.985 }}
+        animate={{ opacity: loaded ? 1 : 0, scale: 1 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         onLoad={() => setLoaded(true)}
+        className="max-h-full max-w-full object-contain rounded-xl sm:rounded-2xl shadow-2xl"
       />
     </div>
   );
 }
 
-function MetaList({ meta }: { meta: PhotoMeta }) {
-  const rows: Array<[string, string]> = [
-    ["Camera", meta.camera],
-    ["Lens", meta.lens],
-    ["Focal length", formatFocalLength(meta.focalLength)],
-    ["Aperture", formatAperture(meta.aperture)],
-    ["Shutter speed", formatShutter(meta.shutter)],
-    ["ISO", meta.iso != null ? `ISO ${meta.iso}` : undefined],
-    ["Taken", formatTakenAt(meta.takenAt)],
-  ].filter((entry): entry is [string, string] => entry[1] !== undefined);
+function Details({ photo }: { photo: Photo }) {
+  const meta = photo.meta;
+  const taken = meta !== undefined ? formatTakenAt(meta.takenAt) : undefined;
+  const camera = meta?.camera;
+  const lens = meta?.lens;
 
-  if (rows.length === 0) return null;
+  const settings: Array<[string, string | undefined]> = [
+    [content.lightbox.aperture, formatAperture(meta?.aperture)],
+    [content.lightbox.shutter, formatShutter(meta?.shutter)],
+    [content.lightbox.focalLength, formatFocalLength(meta?.focalLength)],
+    [content.lightbox.iso, meta?.iso != null ? `ISO ${meta.iso}` : undefined],
+  ];
+  const visibleSettings = settings.filter(
+    (entry): entry is [string, string] => entry[1] !== undefined,
+  );
+
+  const dimensions =
+    meta?.width !== undefined && meta?.height !== undefined
+      ? `${meta.width} x ${meta.height} px`
+      : undefined;
+  const fileRows: Array<[string, string | undefined]> = [
+    [content.lightbox.dimensions, dimensions],
+  ];
+  const visibleFiles = fileRows.filter(
+    (entry): entry is [string, string] => entry[1] !== undefined,
+  );
+
+  if (taken === undefined && camera === undefined && lens === undefined && visibleSettings.length === 0 && visibleFiles.length === 0) {
+    return null;
+  }
 
   return (
-    <dl className="m-0 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-3 border-t border-[var(--outline-variant)]/50 pt-4">
-      {rows.map(([label, value]) => (
-        <div key={label}>
-          <dt className="text-[10px] font-expressive font-black uppercase tracking-[0.16em] opacity-50">
-            {label}
-          </dt>
-          <dd className="m-0 mt-0.5 text-sm font-bold">{value}</dd>
+    <div>
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div className="flex flex-col gap-2.5 text-sm min-w-0">
+          {taken !== undefined && (
+            <span className="inline-flex items-center gap-2 opacity-80">
+              <Calendar size={16} className="shrink-0 text-[var(--primary)]" />
+              {taken}
+            </span>
+          )}
+          {camera !== undefined && (
+            <span className="inline-flex items-center gap-2 opacity-80">
+              <Camera size={16} className="shrink-0 text-[var(--primary)]" />
+              <span className="truncate">{camera}</span>
+            </span>
+          )}
+          {lens !== undefined && <span className="pl-6 opacity-80">{lens}</span>}
         </div>
-      ))}
-    </dl>
+        <a
+          href={photo.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[var(--primary)]/10 px-3 py-1.5 text-xs font-bold text-[var(--primary)] hover:bg-[var(--primary)]/20 transition-colors shrink-0"
+        >
+          {content.lightbox.fullSize}
+          <ExternalLink size={14} />
+        </a>
+      </div>
+      {visibleSettings.length > 0 && (
+        <div className="mb-4">
+          <h2 className="text-[11px] font-black uppercase tracking-widest opacity-60 mb-2">
+            {content.lightbox.shotSettings}
+          </h2>
+          <div className="grid grid-cols-2 gap-2">
+            {visibleSettings.map(([label, value]) => (
+              <StatCell key={label} label={label} value={value} />
+            ))}
+          </div>
+        </div>
+      )}
+      {visibleFiles.length > 0 && (
+        <div>
+          <h2 className="text-[11px] font-black uppercase tracking-widest opacity-60 mb-2">
+            {content.lightbox.fileInfo}
+          </h2>
+          <div className="grid grid-cols-2 gap-2">
+            {visibleFiles.map(([label, value]) => (
+              <StatCell key={label} label={label} value={value} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StatCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-[var(--outline-variant)]/60 bg-[var(--surface-variant)]/60 px-3 py-2 min-w-0">
+      <span className="block text-[10px] font-black uppercase tracking-widest opacity-60 mb-0.5">
+        {label}
+      </span>
+      <span className="block text-sm font-bold truncate">{value}</span>
+    </div>
   );
 }
