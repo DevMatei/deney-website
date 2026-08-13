@@ -7,6 +7,7 @@ const GRID_PADDING = 16;
 const COLUMN_GAP = 6;
 const PHOTO_MARGIN = 6;
 const MAX_PHOTOS_PER_COLUMN = 12;
+const MAX_COLUMNS = 8;
 
 interface ColumnConfig {
   photos: Photo[];
@@ -21,7 +22,7 @@ interface RandomColumn {
 }
 
 function useColumnCount() {
-  const [count, setCount] = useState(8);
+  const [count, setCount] = useState(MAX_COLUMNS);
   useEffect(() => {
     const queries = [
       window.matchMedia("(min-width: 1200px)"),
@@ -29,7 +30,7 @@ function useColumnCount() {
       window.matchMedia("(min-width: 600px)"),
     ];
     const update = () => {
-      if (queries[0].matches) setCount(8);
+      if (queries[0].matches) setCount(MAX_COLUMNS);
       else if (queries[1].matches) setCount(7);
       else if (queries[2].matches) setCount(6);
       else setCount(5);
@@ -106,20 +107,19 @@ export function Waterfall({
 
   const randomized = useMemo<RandomColumn[]>(
     () =>
-      Array.from({ length: columnCount }, () => {
+      Array.from({ length: MAX_COLUMNS }, () => {
         const duration = MIN_DURATION + Math.random() * DURATION_SPREAD;
         const delay = -Math.random() * duration;
         return { pool: shuffled(photos), duration, delay };
       }),
-    [photos, columnCount],
+    [photos],
   );
 
   const columns = useMemo<ColumnConfig[]>(() => {
     if (photos.length === 0 || box.height === 0) return [];
     const columnWidth =
       (box.width - GRID_PADDING - COLUMN_GAP * (columnCount - 1)) / columnCount;
-    return Array.from({ length: columnCount }, (_, index) => {
-      const { pool, duration, delay } = randomized[index];
+    return randomized.slice(0, columnCount).map(({ pool, duration, delay }) => {
       return {
         photos: sampleColumn(pool, columnWidth, box.height),
         duration,
