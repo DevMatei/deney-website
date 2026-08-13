@@ -115,7 +115,7 @@ export function PhotoModal({
                       step(-1);
                     }}
                     aria-label={content.lightbox.previous}
-                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
                   >
                     <ArrowLeft size={22} />
                   </button>
@@ -126,7 +126,7 @@ export function PhotoModal({
                       step(1);
                     }}
                     aria-label={content.lightbox.next}
-                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
                   >
                     <ArrowRight size={22} />
                   </button>
@@ -165,7 +165,7 @@ function PhotoImage({ photo }: { photo: Photo }) {
       {meta?.blur !== undefined && (
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center pointer-events-none"
           style={{
             backgroundImage: `url(${meta.blur})`,
             filter: "blur(28px) saturate(1.2)",

@@ -60,7 +60,7 @@ export const SideItem = memo(
           </motion.div>
         </div>
         <motion.span
-          animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 140 }}
+          animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 200 }}
           transition={{ type: "spring", stiffness: 280, damping: 34 }}
           className="font-display tracking-[0.08em] text-[15px] uppercase relative z-10 font-black overflow-hidden whitespace-nowrap"
         >
@@ -138,7 +138,7 @@ export function Sidebar() {
             className="w-12 h-12 max-w-none rounded-full object-cover shrink-0 border-2 border-[var(--outline-variant)]"
           />
           <motion.div
-            animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 180 }}
+            animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 200 }}
             transition={{ type: "spring", stiffness: 280, damping: 34 }}
             className="overflow-hidden whitespace-nowrap min-w-0"
           >
@@ -208,7 +208,7 @@ export function Sidebar() {
           >
             {isMini ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
             <motion.span
-              animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 140 }}
+              animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 200 }}
               transition={{ type: "spring", stiffness: 280, damping: 34 }}
               className="text-[11px] font-black uppercase tracking-[0.14em] overflow-hidden whitespace-nowrap"
             >

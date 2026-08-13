@@ -45,7 +45,9 @@ const NavPillItem = memo(
         transition={pressed ? { duration: 0.08 } : spring}
         className={cn(
           "relative flex items-center justify-center outline-none cursor-pointer shrink-0 select-none",
-          isActive ? "gap-2 px-4 py-2.5 rounded-full" : "w-10 h-10 rounded-full",
+          isActive
+            ? "gap-2 px-4 py-2.5 rounded-full max-[359px]:px-3"
+            : "w-10 h-10 rounded-full max-[359px]:w-9 max-[359px]:h-9",
         )}
         aria-label={item.label}
         aria-pressed={isActive}
@@ -74,10 +76,10 @@ const NavPillItem = memo(
             <motion.span
               layout
               initial={{ opacity: 0, maxWidth: 0, x: -8 }}
-              animate={{ opacity: 1, maxWidth: 128, x: 0 }}
+              animate={{ opacity: 1, maxWidth: 200, x: 0 }}
               exit={{ opacity: 0, maxWidth: 0, x: -8 }}
               transition={{ ...LABEL_SPRING, duration: 0.24 }}
-              className="relative z-[1] inline-block text-[11px] font-expressive font-black uppercase tracking-widest italic whitespace-nowrap overflow-hidden"
+              className="relative z-[1] inline-block text-[11px] font-expressive font-black uppercase tracking-widest italic whitespace-nowrap overflow-hidden pr-1"
               style={{ color: "var(--on-primary)" }}
             >
               {item.label}
@@ -105,7 +107,17 @@ export const MobileFloatingNav = memo(
     const highHz = settings.highHz;
 
     const PILL_H = 60;
-    const SIDE_PAD = Math.round(PILL_H * 0.55);
+    const [narrow, setNarrow] = useState(() =>
+      window.matchMedia("(max-width: 359px)").matches,
+    );
+    const SIDE_PAD = narrow ? 20 : Math.round(PILL_H * 0.55);
+
+    useEffect(() => {
+      const mq = window.matchMedia("(max-width: 359px)");
+      const onChange = () => setNarrow(mq.matches);
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    }, []);
 
     const prevPage = useRef(activePage);
     const [bounce, setBounce] = useState(false);

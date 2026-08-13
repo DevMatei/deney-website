@@ -125,7 +125,8 @@ function RainPhoto({
       <img
         src={photo.bandUrl || photo.url}
         alt=""
-        loading="lazy"
+        loading="eager"
+        fetchPriority="high"
         decoding="async"
         width={meta?.width}
         height={meta?.height}

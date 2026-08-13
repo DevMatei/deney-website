@@ -36,7 +36,7 @@ export function WaterfallBand({
         <Waterfall photos={photos} onSelect={onSelect} maxPerColumn={maxPerColumn} />
       )}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0"
         style={{
           backgroundColor: scrim === "strong" ? "rgba(0, 0, 0, 0.45)" : "rgba(0, 0, 0, 0.28)",
           backgroundImage:
