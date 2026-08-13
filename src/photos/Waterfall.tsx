@@ -14,6 +14,12 @@ interface ColumnConfig {
   delay: number;
 }
 
+interface RandomColumn {
+  pool: Photo[];
+  duration: number;
+  delay: number;
+}
+
 function useColumnCount() {
   const [count, setCount] = useState(8);
   useEffect(() => {
@@ -78,26 +84,49 @@ export function Waterfall({
   useEffect(() => {
     const el = gridRef.current;
     if (!el) return;
-    const update = () => setBox({ width: el.clientWidth, height: el.clientHeight });
+    let frame = 0;
+    const update = () => {
+      const width = el.clientWidth;
+      const height = el.clientHeight;
+      setBox((prev) =>
+        prev.width === width && prev.height === height ? prev : { width, height },
+      );
+    };
     update();
-    const observer = new ResizeObserver(update);
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    });
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, []);
+
+  const randomized = useMemo<RandomColumn[]>(
+    () =>
+      Array.from({ length: columnCount }, () => {
+        const duration = MIN_DURATION + Math.random() * DURATION_SPREAD;
+        const delay = -Math.random() * duration;
+        return { pool: shuffled(photos), duration, delay };
+      }),
+    [photos, columnCount],
+  );
 
   const columns = useMemo<ColumnConfig[]>(() => {
     if (photos.length === 0 || box.height === 0) return [];
-    const columnWidth = (box.width - GRID_PADDING - COLUMN_GAP * (columnCount - 1)) / columnCount;
-    return Array.from({ length: columnCount }, () => {
-      const duration = MIN_DURATION + Math.random() * DURATION_SPREAD;
-      const delay = -Math.random() * duration;
+    const columnWidth =
+      (box.width - GRID_PADDING - COLUMN_GAP * (columnCount - 1)) / columnCount;
+    return Array.from({ length: columnCount }, (_, index) => {
+      const { pool, duration, delay } = randomized[index];
       return {
-        photos: sampleColumn(photos, columnWidth, box.height),
+        photos: sampleColumn(pool, columnWidth, box.height),
         duration,
         delay,
       };
     });
-  }, [photos, columnCount, box]);
+  }, [randomized, columnCount, box, photos.length]);
 
   return (
     <div
@@ -116,9 +145,16 @@ export function Waterfall({
               animation: `waterfall ${column.duration}s linear ${column.delay}s infinite`,
             }}
           >
-            {[...column.photos, ...column.photos].map((photo, itemIndex) => (
+            {column.photos.map((photo) => (
               <RainPhoto
-                key={`${photo.url}-${itemIndex}`}
+                key={`${photo.url}-a`}
+                photo={photo}
+                onSelect={onSelect}
+              />
+            ))}
+            {column.photos.map((photo) => (
+              <RainPhoto
+                key={`${photo.url}-b`}
                 photo={photo}
                 onSelect={onSelect}
               />
