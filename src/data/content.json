@@ -1,0 +1,90 @@
+{
+  "site": {
+    "name": "deney",
+    "role": "Photographer",
+    "footer": {
+      "prefix": "made by",
+      "label": "devmatei.com",
+      "url": "https://devmatei.com"
+    }
+  },
+  "nav": [
+    { "id": "home", "label": "Home", "path": "/" },
+    { "id": "photos", "label": "Photos", "path": "/photos" },
+    { "id": "about", "label": "About", "path": "/about" },
+    { "id": "contact", "label": "Contact", "path": "/contact" }
+  ],
+  "navbar": {
+    "discordLabel": "Discord"
+  },
+  "sidebar": {
+    "collapseLabel": "Collapse sidebar",
+    "expandLabel": "Expand sidebar"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Photography",
+      "title": "deney",
+      "tagline": "Chasing light, one frame at a time",
+      "primaryCta": "View photos",
+      "secondaryCta": "About deney"
+    },
+    "featuredLabel": "Featured",
+    "featuredViewAll": "View all",
+    "featuredEmpty": "Photo coming soon",
+    "aboutPreview": {
+      "label": "About deney",
+      "body": "deney shoots the quiet moments: winter streets under streetlights, empty courtyards, fog, and light breaking through bare branches. The full gallery lives on the Photos page, and a proper introduction is on its way.",
+      "cta": "Read more"
+    }
+  },
+  "photos": {
+    "eyebrow": "Gallery",
+    "title": "Photos",
+    "description": "The full gallery. Click any photo for a closer look.",
+    "countSuffix": "photos in the gallery",
+    "endCard": {
+      "title": "That's all for now",
+      "body": "New photos are added over time.",
+      "button": "Back to top"
+    },
+    "empty": "Photos will appear here once they are added to src/assets/photos"
+  },
+  "about": {
+    "eyebrow": "Info",
+    "title": "About",
+    "description": "How the photos happen: walks, available light, and bad weather.",
+    "quote": "One camera and a walk until something looks right.",
+    "intro": "deney is a photographer drawn to available light and late hours: snow-lit streets, buildings with warm windows, sunsets through branches, and quiet harbors. No heavy setups, no studio tricks. One camera and a walk until something looks right.",
+    "sections": [
+      {
+        "heading": "Style",
+        "body": "Mostly dark scenes with a single strong light source, weather in the frame, and compositions that let the scene breathe. The work is moody rather than polished, and the mood comes from what the light is doing, not from editing."
+      },
+      {
+        "heading": "What deney shoots",
+        "body": "Night streets in winter, fog and snow, empty courtyards, old buildings with lit windows, sunsets over hills, and harbors at first light. If the weather is bad, that is usually the best time to go out."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Discord",
+    "title": "Contact",
+    "description": "Discord is the only way to reach deney. The profile link only opens when you are signed in to Discord.",
+    "handle": "@deney.cmd",
+    "openButton": "Open Discord profile",
+    "xUrl": "https://x.com/deney_lol",
+    "xLabel": "X",
+    "xButton": "Follow on X",
+    "discordUrl": "https://discord.com/users/1065304440694919178",
+    "discordUserId": "1065304440694919178"
+  },
+  "avatarAlt": "deney avatar",
+  "footer": {
+    "navigationLabel": "Navigation",
+    "contactLabel": "Contact",
+    "backToTop": "Back to top",
+    "note": "A quiet photography portfolio, updated by hand."
+  },
+  "photoAlt": "Photograph by deney"
+}

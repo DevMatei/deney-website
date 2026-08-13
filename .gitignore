@@ -1,0 +1,8 @@
+node_modules
+dist
+.vercel
+src/assets/generated
+*.tsbuildinfo
+assets
+/favicon.png
+/pfp.webp
