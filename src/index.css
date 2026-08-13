@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 @font-face {
+  font-family: "Google Sans Flex";
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url("/fonts/google-sans-flex-latin.woff2") format("woff2-variations");
+}
+
+@font-face {
   font-family: "Roboto Flex Variable";
   font-style: normal;
   font-weight: 100 1000;
@@ -10,10 +18,10 @@
 }
 
 @theme {
-  --font-sans: "Roboto Flex Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Roboto Flex Variable", sans-serif;
-  --font-expressive: "Roboto Flex Variable", sans-serif;
-  --font-expressive-bold: "Roboto Flex Variable", sans-serif;
+  --font-sans: "Google Sans Flex", "Roboto Flex Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Google Sans Flex", "Roboto Flex Variable", sans-serif;
+  --font-expressive: "Google Sans Flex", "Roboto Flex Variable", sans-serif;
+  --font-expressive-bold: "Google Sans Flex", "Roboto Flex Variable", sans-serif;
   --border-6: 6px;
   --ring-6: 6px;
 }

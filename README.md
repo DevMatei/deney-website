@@ -59,7 +59,7 @@ The theme is defined with CSS variables in `src/index.css`:
 
 - `--primary-hue`, `--primary-chroma` and the related hue variables drive the whole amber palette in oklch color space. Change the hue to re-theme the site.
 - Light and dark schemes are defined in the `:root` and `.dark` blocks.
-- Typography uses the Roboto Flex variable font (self-hosted in `public/fonts/`), with heavy weights and wide tracking for display text.
+- Typography uses Google Sans Flex (self-hosted in `public/fonts/`) with Roboto Flex as fallback, heavy weights and wide tracking for display text.
 
 ## Deployment
 
