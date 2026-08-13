@@ -3,8 +3,8 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { MotionConfig } from "motion/react";
 import { cn } from "./lib/cn";
 import { useTheme } from "./theme/ThemeContext";
-import { Camera, Home, Mail, User } from "./components/MaterialIcon";
-import { MobileFloatingNav } from "./components/MobileFloatingNav";
+import { Camera, Home, Mail, User } from "./components/Icons";
+import { MobileNav } from "./components/MobileNav";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { Sidebar } from "./components/Sidebar";
 import { HomePage } from "./pages/HomePage";
@@ -80,7 +80,7 @@ export default function App() {
             </span>
           </footer>
         </main>
-        <MobileFloatingNav
+        <MobileNav
           items={navItems}
           activePage={page}
           onSelect={goto}

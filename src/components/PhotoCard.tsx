@@ -33,7 +33,7 @@ export function PhotoCard({
       onClick={() => onSelect(photo)}
       aria-label={photo.alt}
       className={cn(
-        "lens-item group relative w-full overflow-hidden rounded-3xl border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)] cursor-pointer outline-none hover:border-[var(--primary)] transition-colors",
+        "photo-card group relative w-full overflow-hidden rounded-3xl border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)] cursor-pointer outline-none hover:border-[var(--primary)] transition-colors",
         fill && "h-full",
       )}
       style={fill ? undefined : { aspectRatio: String(aspect) }}

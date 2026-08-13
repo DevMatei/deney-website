@@ -4,7 +4,7 @@ import { PhotoModal } from "../components/PhotoModal";
 import { WaterfallBand } from "../photos/WaterfallBand";
 import { usePhotos } from "../photos/usePhotos";
 import type { Photo } from "../photos/usePhotos";
-import { ExternalLink } from "../components/MaterialIcon";
+import { ExternalLink } from "../components/Icons";
 import XLogoIcon from "../components/XLogoIcon";
 import content from "../data/content.json";
 
@@ -16,10 +16,10 @@ export function ContactPage() {
     <div className="flex-1 flex flex-col">
       <WaterfallBand photos={photos} onSelect={setSelected} height="46vh" defer>
         <div className="w-full max-w-[1080px]">
-          <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60">
+          <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-60">
             {content.contact.eyebrow}
           </div>
-          <h1 className="page-title font-expressive-bold">{content.contact.title}</h1>
+          <h1 className="page-heading font-emphasis-bold">{content.contact.title}</h1>
           <p className="font-medium opacity-70 mt-2">{content.contact.description}</p>
         </div>
       </WaterfallBand>
@@ -31,10 +31,10 @@ export function ContactPage() {
             alt={content.avatarAlt}
             className="w-24 h-24 rounded-full object-cover border-4 border-[var(--outline-variant)]"
           />
-          <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60">
+          <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-60">
             {content.contact.eyebrow}
           </div>
-          <div className="font-expressive-bold text-3xl uppercase tracking-tight">
+          <div className="font-emphasis-bold text-3xl uppercase tracking-tight">
             {content.contact.handle}
           </div>
           <p className="font-medium opacity-70 max-w-[360px]">
@@ -44,7 +44,7 @@ export function ContactPage() {
             href={content.contact.discordUrl}
             target="_blank"
             rel="noreferrer"
-            className="m3-button-filled w-full"
+            className="btn-primary w-full"
           >
             {content.contact.openButton}
             <ExternalLink size={16} />
@@ -53,7 +53,7 @@ export function ContactPage() {
             href={content.contact.xUrl}
             target="_blank"
             rel="noreferrer"
-            className="m3-button-outlined w-full"
+            className="btn-outline w-full"
           >
             <XLogoIcon className="w-4 h-4" />
             {content.contact.xButton}

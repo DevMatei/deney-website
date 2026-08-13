@@ -4,7 +4,7 @@ import type { TargetAndTransition, VariantLabels } from "motion/react";
 import { cn } from "../lib/cn";
 import { useTheme } from "../theme/ThemeContext";
 
-export function TiltContainer({
+export function TiltCard({
   children,
   className,
   innerClassName,
@@ -60,19 +60,11 @@ export function TiltContainer({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     applyTilt(-((py - centerY) / centerY) * 6, ((px - centerX) / centerX) * 6);
-    const card = cardRef.current;
-    if (card) {
-      card.style.setProperty("--glare-x", `${(px / rect.width) * 100}%`);
-      card.style.setProperty("--glare-y", `${(py / rect.height) * 100}%`);
-      card.style.setProperty("--glare-opacity", "1");
-    }
   };
 
   const handleMouseLeave = () => {
     rectRef.current = null;
     applyTilt(0, 0);
-    const card = cardRef.current;
-    if (card) card.style.setProperty("--glare-opacity", "0");
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -86,7 +78,7 @@ export function TiltContainer({
   return (
     <motion.div
       ref={wrapperRef}
-      className={cn("tilt-active", className)}
+      className={cn("tilt-wrap", className)}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -102,7 +94,7 @@ export function TiltContainer({
     >
       <div
         ref={cardRef}
-        className={cn("tilt-card relative overflow-hidden", innerClassName)}
+        className={cn("tilt-inner relative overflow-hidden", innerClassName)}
         style={{
           transition: "transform 120ms ease-out",
         }}

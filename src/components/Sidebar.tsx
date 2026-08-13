@@ -2,14 +2,14 @@ import { memo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "../lib/cn";
-import { haptic } from "../lib/haptics";
+import { vibrate } from "../lib/vibration";
 import { useTheme } from "../theme/ThemeContext";
-import { Camera, ChevronLeft, ChevronRight, Home, Mail, User } from "./MaterialIcon";
+import { Camera, ChevronLeft, ChevronRight, Home, Mail, User } from "./Icons";
 import DiscordIcon from "./DiscordIcon";
 import XLogoIcon from "./XLogoIcon";
 import content from "../data/content.json";
 
-export const SideItem = memo(
+export const NavItem = memo(
   ({
     glyph: Icon,
     text,
@@ -32,13 +32,13 @@ export const SideItem = memo(
         whileHover={{ scale: 1.015 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => {
-          haptic.light();
+          vibrate.light();
           onSelect();
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
-          "relative group outline-none cursor-pointer font-black motion-gpu isolate flex items-center w-full sidebar-item rounded-2xl",
+          "relative group outline-none cursor-pointer font-black anim-gpu isolate flex items-center w-full sidebar-item rounded-2xl",
           isMini ? "justify-center py-2.5" : "justify-center gap-3 px-4 py-3",
           isSelected
             ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
@@ -84,7 +84,7 @@ export const SideItem = memo(
   },
 );
 
-SideItem.displayName = "SideItem";
+NavItem.displayName = "NavItem";
 
 export function Sidebar() {
   const { settings, updateSettings } = useTheme();
@@ -124,7 +124,7 @@ export function Sidebar() {
           backdropFilter: "blur(20px)",
         }}
         transition={{ type: "spring", stiffness: 220, damping: 38 }}
-        className="flex flex-col h-[calc(100dvh-1.5rem)] w-auto motion-gpu border-2 border-[var(--outline-variant)] bg-[var(--surface)]/85 shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]"
+        className="flex flex-col h-[calc(100dvh-1.5rem)] w-auto anim-gpu border-2 border-[var(--outline-variant)] bg-[var(--surface)]/85 shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]"
       >
         <div
           className={cn(
@@ -145,7 +145,7 @@ export function Sidebar() {
             <div className="font-display text-2xl font-black tracking-tight leading-none">
               {content.site.name}
             </div>
-            <div className="text-[10px] font-expressive font-black uppercase tracking-[0.18em] opacity-60 mt-1.5">
+            <div className="text-[10px] font-emphasis font-black uppercase tracking-[0.18em] opacity-60 mt-1.5">
               {content.site.role}
             </div>
           </motion.div>
@@ -154,12 +154,12 @@ export function Sidebar() {
         <div
           id="sidebar-nav"
           className={cn(
-            "flex flex-col gap-1.5 overflow-y-auto scrollbar-hide flex-1 min-h-0",
+            "flex flex-col gap-1.5 overflow-y-auto no-scrollbar flex-1 min-h-0",
             isMini ? "items-center" : "px-1",
           )}
         >
           {navItems.map((item) => (
-            <SideItem
+            <NavItem
               key={item.key}
               glyph={item.glyph}
               text={item.label}

@@ -1,4 +1,4 @@
-export const haptic = {
+export const vibrate = {
   light: () => {
     try {
       if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10);

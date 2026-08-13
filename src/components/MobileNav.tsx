@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import { cn } from "../lib/cn";
-import { haptic } from "../lib/haptics";
+import { vibrate } from "../lib/vibration";
 import { useTheme } from "../theme/ThemeContext";
 
 interface NavItem {
@@ -14,7 +14,7 @@ const PILL_SPRING = { type: "spring" as const, stiffness: 500, damping: 32, mass
 const ACTIVE_PILL_SPRING = { type: "spring" as const, stiffness: 520, damping: 36, mass: 0.5 };
 const ICON_SPRING = { type: "spring" as const, stiffness: 520, damping: 38, mass: 0.45 };
 const LABEL_SPRING = { type: "spring" as const, stiffness: 480, damping: 38, mass: 0.45 };
-const NavPillItem = memo(
+const DockItem = memo(
   ({
     item,
     isActive,
@@ -30,7 +30,7 @@ const NavPillItem = memo(
     const Icon = item.glyph;
     const spring = highHz ? { ...PILL_SPRING, stiffness: 600, damping: 36 } : PILL_SPRING;
     const handleClick = useCallback(() => {
-      haptic.light();
+      vibrate.light();
       onSelect();
     }, [onSelect]);
 
@@ -55,7 +55,7 @@ const NavPillItem = memo(
         {isActive && (
           <motion.div
             layout
-            layoutId="mobile-nav-active-pill"
+            layoutId="nav-pill"
             initial={false}
             animate={{ opacity: 1, scaleX: 1, scaleY: 1 }}
             transition={ACTIVE_PILL_SPRING}
@@ -79,7 +79,7 @@ const NavPillItem = memo(
               animate={{ opacity: 1, maxWidth: 200, x: 0 }}
               exit={{ opacity: 0, maxWidth: 0, x: -8 }}
               transition={{ ...LABEL_SPRING, duration: 0.24 }}
-              className="relative z-[1] inline-block text-[11px] font-expressive font-black uppercase tracking-widest italic whitespace-nowrap overflow-hidden pr-1"
+              className="relative z-[1] inline-block text-[11px] font-emphasis font-black uppercase tracking-widest italic whitespace-nowrap overflow-hidden pr-1"
               style={{ color: "var(--on-primary)" }}
             >
               {item.label}
@@ -91,9 +91,9 @@ const NavPillItem = memo(
   },
 );
 
-NavPillItem.displayName = "NavPillItem";
+DockItem.displayName = "DockItem";
 
-export const MobileFloatingNav = memo(
+export const MobileNav = memo(
   ({
     items,
     activePage,
@@ -183,7 +183,7 @@ export const MobileFloatingNav = memo(
         >
           <MotionConfig reducedMotion={settings.disableAnimations ? "always" : "user"}>
             {items.map((item) => (
-              <NavPillItem
+              <DockItem
                 key={item.key}
                 item={item}
                 isActive={activePage === item.key}
@@ -199,4 +199,4 @@ export const MobileFloatingNav = memo(
   },
 );
 
-MobileFloatingNav.displayName = "MobileFloatingNav";
+MobileNav.displayName = "MobileNav";

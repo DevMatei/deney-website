@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight } from "../components/MaterialIcon";
+import { ArrowRight } from "../components/Icons";
 import { Card } from "../components/Card";
 import { PhotoCard } from "../components/PhotoCard";
 import { PhotoModal } from "../components/PhotoModal";
@@ -26,20 +26,20 @@ export function HomePage() {
         defer
       >
         <div className="w-full max-w-[1080px] pointer-events-none">
-          <div className="m3-card !p-6 sm:!p-10 md:!p-14 text-left pointer-events-auto relative">
-            <div className="m3-chip !py-1.5 mb-6 inline-flex">
+          <div className="panel !p-6 sm:!p-10 md:!p-14 text-left pointer-events-auto relative">
+            <div className="chip !py-1.5 mb-6 inline-flex">
               {content.home.hero.eyebrow}
             </div>
-            <h1 className="font-expressive-bold text-[5.5rem] sm:text-[8rem] leading-[1] tracking-tighter text-[var(--on-surface)] pb-2">
+            <h1 className="font-emphasis-bold text-[5.5rem] sm:text-[8rem] leading-[1] tracking-tighter text-[var(--on-surface)] pb-2">
               {content.home.hero.title}
             </h1>
-            <p className="font-expressive italic text-lg sm:text-2xl font-bold opacity-70 mt-6 max-w-[620px]">
+            <p className="font-emphasis italic text-lg sm:text-2xl font-bold opacity-70 mt-6 max-w-[620px]">
               {content.home.hero.tagline}
             </p>
             <div className="flex flex-wrap gap-3 mt-8">
               <button
                 type="button"
-                className="m3-button-filled"
+                className="btn-primary"
                 onClick={() => navigate("/photos")}
               >
                 {content.home.hero.primaryCta}
@@ -47,7 +47,7 @@ export function HomePage() {
               </button>
               <button
                 type="button"
-                className="m3-button-tonal"
+                className="btn-secondary"
                 onClick={() => navigate("/about")}
               >
                 {content.home.hero.secondaryCta}
@@ -59,7 +59,7 @@ export function HomePage() {
 
       <section className="px-4 md:px-10 pt-10 md:pt-14 pb-8 w-full max-w-[1080px] mx-auto">
         <div className="flex items-end justify-between mb-4">
-          <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60">
+          <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-60">
             {content.home.featuredLabel}
           </div>
           <button
@@ -112,7 +112,7 @@ export function HomePage() {
       <section className="px-4 md:px-10 pt-10 md:pt-14 pb-10 w-full max-w-[1080px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-4">
           <Card className="md:row-span-2" innerClassName="!p-8 md:flex md:flex-col md:h-full">
-            <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60">
+            <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-60">
               {content.home.aboutPreview.label}
             </div>
             <p className="font-medium text-lg leading-relaxed mt-4 max-w-[640px] opacity-90">
@@ -120,7 +120,7 @@ export function HomePage() {
             </p>
             <button
               type="button"
-              className="m3-button-outlined !px-5 !py-2.5 mt-6 md:mt-auto text-sm"
+              className="btn-outline !px-5 !py-2.5 mt-6 md:mt-auto text-sm"
               onClick={() => navigate("/about")}
             >
               {content.home.aboutPreview.cta}
@@ -128,15 +128,15 @@ export function HomePage() {
             </button>
           </Card>
           <Card innerClassName="!p-8 flex flex-col justify-center">
-            <div className="font-expressive-bold text-7xl leading-none tracking-tighter">
+            <div className="font-emphasis-bold text-7xl leading-none tracking-tighter">
               {photos.length}
             </div>
-            <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60 mt-2">
+            <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-60 mt-2">
               {content.photos.countSuffix}
             </div>
             <button
               type="button"
-              className="m3-button-tonal !px-5 !py-2.5 mt-5 self-start text-sm"
+              className="btn-secondary !px-5 !py-2.5 mt-5 self-start text-sm"
               onClick={() => navigate("/photos")}
             >
               {content.home.hero.primaryCta}
@@ -145,7 +145,7 @@ export function HomePage() {
           </Card>
           <Card innerClassName="!p-8 flex flex-col justify-center">
             <DiscordIcon className="w-10 h-10 mb-3" />
-            <div className="font-expressive-bold text-2xl uppercase tracking-tight">
+            <div className="font-emphasis-bold text-2xl uppercase tracking-tight">
               {content.contact.handle}
             </div>
             <div className="text-sm font-medium opacity-60 mt-1 max-w-[280px]">
@@ -153,7 +153,7 @@ export function HomePage() {
             </div>
             <button
               type="button"
-              className="m3-button-filled !px-5 !py-2.5 mt-5 self-start text-sm"
+              className="btn-primary !px-5 !py-2.5 mt-5 self-start text-sm"
               onClick={() => navigate("/contact")}
             >
               {content.contact.title}

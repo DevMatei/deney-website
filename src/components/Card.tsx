@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "../lib/cn";
 import { useTheme } from "../theme/ThemeContext";
-import { TiltContainer } from "./TiltContainer";
+import { TiltCard } from "./TiltCard";
 
 export function Card({
   children,
@@ -35,12 +35,12 @@ export function Card({
     : { opacity: 0, y: 20, scale: 0.95 };
 
   return (
-    <TiltContainer
+    <TiltCard
       onClick={onClick}
       className={className}
       innerClassName={cn(
         !noDefaultStyles &&
-          "m3-card readme-card overflow-hidden cursor-default relative border border-[var(--outline-variant)]",
+          "panel overflow-hidden cursor-default relative border border-[var(--outline-variant)]",
         onClick && "cursor-pointer",
         innerClassName,
       )}
@@ -57,6 +57,6 @@ export function Card({
       }
     >
       {children}
-    </TiltContainer>
+    </TiltCard>
   );
 }

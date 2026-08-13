@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUp } from "../components/MaterialIcon";
+import { ArrowUp } from "../components/Icons";
 import { PhotoCard } from "../components/PhotoCard";
 import { PhotoModal } from "../components/PhotoModal";
 import { WaterfallBand } from "../photos/WaterfallBand";
@@ -15,10 +15,10 @@ export function PhotosPage() {
     <div className="flex-1 flex flex-col">
       <WaterfallBand photos={photos} onSelect={setSelected} height="46vh" defer>
         <div className="w-full max-w-[1080px]">
-          <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-60">
+          <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-60">
             {content.photos.eyebrow}
           </div>
-          <h1 className="page-title font-expressive-bold">{content.photos.title}</h1>
+          <h1 className="page-heading font-emphasis-bold">{content.photos.title}</h1>
           <p className="font-medium opacity-70 mt-2">{content.photos.description}</p>
         </div>
       </WaterfallBand>
@@ -47,13 +47,13 @@ export function PhotosPage() {
               style={{ aspectRatio: "3 / 4" }}
             >
               <ArrowUp size={28} />
-              <div className="text-[11px] font-expressive font-black uppercase tracking-widest opacity-70">
+              <div className="text-[11px] font-emphasis font-black uppercase tracking-widest opacity-70">
                 {content.photos.endCard.title}
               </div>
               <div className="text-sm font-bold opacity-80 max-w-[220px]">
                 {content.photos.endCard.body}
               </div>
-              <div className="m3-button-tonal !px-5 !py-2 text-sm">
+              <div className="btn-secondary !px-5 !py-2 text-sm">
                 {content.photos.endCard.button}
               </div>
             </button>

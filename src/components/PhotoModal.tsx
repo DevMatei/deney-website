@@ -14,7 +14,7 @@ import {
   Camera,
   ExternalLink,
   X,
-} from "./MaterialIcon";
+} from "./Icons";
 import content from "../data/content.json";
 
 export function PhotoModal({

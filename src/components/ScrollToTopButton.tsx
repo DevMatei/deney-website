@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUp } from "./MaterialIcon";
+import { ArrowUp } from "./Icons";
 import { cn } from "../lib/cn";
-import { haptic } from "../lib/haptics";
+import { vibrate } from "../lib/vibration";
 import { useTheme } from "../theme/ThemeContext";
 import content from "../data/content.json";
 
@@ -41,7 +41,7 @@ export function ScrollToTopButton({ isMobile }: { isMobile: boolean }) {
           whileHover={{ scale: 1.08, rotate: -5 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => {
-            haptic.light();
+            vibrate.light();
             window.scrollTo({ top: 0, behavior: settings.disableAnimations ? "auto" : "smooth" });
           }}
           aria-label={content.footer.backToTop}

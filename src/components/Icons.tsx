@@ -31,24 +31,24 @@ const GLYPHS: Record<string, LucideIcon> = {
   open_in_new: LucideExternalLink,
 };
 
-export function materialIcon(name: string) {
+export function createIcon(name: string) {
   const Glyph = GLYPHS[name] ?? LucideCircle;
-  return function MaterialIconGlyph(
+  return function IconsGlyph(
     props: React.ComponentProps<LucideIcon> & { size?: number | string },
   ) {
     return <Glyph {...props} />;
   };
 }
 
-export const X = materialIcon("close");
-export const Home = materialIcon("home");
-export const Camera = materialIcon("photo_camera");
-export const User = materialIcon("person");
-export const Mail = materialIcon("mail");
-export const ChevronLeft = materialIcon("chevron_left");
-export const ChevronRight = materialIcon("chevron_right");
-export const ArrowUp = materialIcon("arrow_upward");
-export const ArrowLeft = materialIcon("arrow_back");
-export const ArrowRight = materialIcon("arrow_forward");
-export const Calendar = materialIcon("calendar");
-export const ExternalLink = materialIcon("open_in_new");
+export const X = createIcon("close");
+export const Home = createIcon("home");
+export const Camera = createIcon("photo_camera");
+export const User = createIcon("person");
+export const Mail = createIcon("mail");
+export const ChevronLeft = createIcon("chevron_left");
+export const ChevronRight = createIcon("chevron_right");
+export const ArrowUp = createIcon("arrow_upward");
+export const ArrowLeft = createIcon("arrow_back");
+export const ArrowRight = createIcon("arrow_forward");
+export const Calendar = createIcon("calendar");
+export const ExternalLink = createIcon("open_in_new");
