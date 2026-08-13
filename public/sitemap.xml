@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://deney.vercel.app/</loc>
+    <loc>https://deney.devmatei.com/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://deney.vercel.app/photos</loc>
+    <loc>https://deney.devmatei.com/photos</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://deney.vercel.app/about</loc>
+    <loc>https://deney.devmatei.com/about</loc>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://deney.vercel.app/contact</loc>
+    <loc>https://deney.devmatei.com/contact</loc>
     <changefreq>yearly</changefreq>
   </url>
 </urlset>
