@@ -7,7 +7,6 @@ export function WaterfallBand({
   onSelect,
   height = "48vh",
   scrim = "soft",
-  maxPerColumn = 4,
   defer = false,
   children,
 }: {
@@ -15,7 +14,6 @@ export function WaterfallBand({
   onSelect: (photo: Photo) => void;
   height?: string;
   scrim?: "soft" | "strong";
-  maxPerColumn?: number;
   defer?: boolean;
   children?: React.ReactNode;
 }) {
@@ -33,7 +31,7 @@ export function WaterfallBand({
       style={{ height }}
     >
       {ready && (
-        <Waterfall photos={photos} onSelect={onSelect} maxPerColumn={maxPerColumn} />
+        <Waterfall photos={photos} onSelect={onSelect} />
       )}
       <div
         className="absolute inset-0"

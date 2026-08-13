@@ -1,8 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Photo } from "./usePhotos";
 
 const MIN_DURATION = 18;
 const DURATION_SPREAD = 6;
+const GRID_PADDING = 16;
+const COLUMN_GAP = 6;
+const PHOTO_MARGIN = 6;
+const MAX_PHOTOS_PER_COLUMN = 12;
 
 interface ColumnConfig {
   photos: Photo[];
@@ -40,45 +44,68 @@ function shuffled<T>(items: T[]): T[] {
   return result;
 }
 
-function sampleColumn(pool: Photo[], maxPerColumn: number): Photo[] {
-  if (pool.length >= maxPerColumn) {
-    return shuffled(pool).slice(0, maxPerColumn);
-  }
+function photoHeight(photo: Photo, columnWidth: number): number {
+  const meta = photo.meta;
+  const ratio = meta?.width && meta?.height ? meta.width / meta.height : 2 / 3;
+  return columnWidth / ratio + PHOTO_MARGIN;
+}
+
+function sampleColumn(pool: Photo[], columnWidth: number, targetHeight: number): Photo[] {
+  const order = shuffled(pool);
   const result: Photo[] = [];
-  while (result.length < maxPerColumn) {
-    result.push(...shuffled(pool));
+  let total = 0;
+  let index = 0;
+  while (total < targetHeight && result.length < MAX_PHOTOS_PER_COLUMN) {
+    const photo = order[index % order.length];
+    index += 1;
+    result.push(photo);
+    total += photoHeight(photo, columnWidth);
   }
-  return result.slice(0, maxPerColumn);
+  return result;
 }
 
 export function Waterfall({
   photos,
   onSelect,
-  maxPerColumn = 8,
 }: {
   photos: Photo[];
   onSelect: (photo: Photo) => void;
-  maxPerColumn?: number;
 }) {
   const columnCount = useColumnCount();
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [box, setBox] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+    const update = () => setBox({ width: el.clientWidth, height: el.clientHeight });
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const columns = useMemo<ColumnConfig[]>(() => {
-    if (photos.length === 0) return [];
+    if (photos.length === 0 || box.height === 0) return [];
+    const columnWidth = (box.width - GRID_PADDING - COLUMN_GAP * (columnCount - 1)) / columnCount;
     return Array.from({ length: columnCount }, () => {
       const duration = MIN_DURATION + Math.random() * DURATION_SPREAD;
       const delay = -Math.random() * duration;
-      return { photos: sampleColumn(photos, maxPerColumn), duration, delay };
+      return {
+        photos: sampleColumn(photos, columnWidth, box.height),
+        duration,
+        delay,
+      };
     });
-  }, [photos, columnCount, maxPerColumn]);
-
-  if (columns.length === 0) return null;
+  }, [photos, columnCount, box]);
 
   return (
     <div
+      ref={gridRef}
       className="absolute inset-0 grid overflow-hidden px-2 py-1"
       style={{
         gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
-        gap: "6px",
+        gap: `${COLUMN_GAP}px`,
       }}
     >
       {columns.map((column, index) => (
@@ -120,7 +147,7 @@ function RainPhoto({
       aria-label={photo.alt}
       onClick={() => onSelect(photo)}
       className="relative w-full overflow-hidden rounded-2xl bg-[var(--surface-variant)] cursor-pointer outline-none focus-visible:ring-4 focus-visible:ring-[var(--primary)]"
-      style={{ aspectRatio: String(ratio), marginBottom: "6px" }}
+      style={{ aspectRatio: String(ratio), marginBottom: `${PHOTO_MARGIN}px` }}
     >
       <img
         src={photo.bandUrl || photo.url}

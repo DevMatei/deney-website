@@ -21,9 +21,8 @@ export function HomePage() {
       <WaterfallBand
         photos={photos}
         onSelect={setSelected}
-        height="calc(100svh - 0px)"
+        height="100svh"
         scrim="strong"
-        maxPerColumn={4}
         defer
       >
         <div className="w-full max-w-[1080px] pointer-events-none">
@@ -107,7 +106,6 @@ export function HomePage() {
         photos={photos}
         onSelect={setSelected}
         height="36vh"
-        maxPerColumn={3}
         defer
       />
 
