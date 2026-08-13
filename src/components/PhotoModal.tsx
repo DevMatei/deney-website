@@ -86,7 +86,10 @@ export function PhotoModal({
           className="fixed inset-0 z-[100] flex flex-col bg-black/85 backdrop-blur-md"
           onClick={onClose}
         >
-          <div className="flex items-center justify-between px-4 py-3 sm:px-6 shrink-0">
+          <div
+            className="flex items-center justify-between px-4 py-3 sm:px-6 shrink-0"
+            onClick={(event) => event.stopPropagation()}
+          >
             <span className="text-sm font-bold tabular-nums text-white/60">
               {total > 0 ? `${index + 1} / ${total}` : ""}
             </span>
@@ -102,15 +105,15 @@ export function PhotoModal({
           </div>
 
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-4 px-4 pb-4 sm:px-6 sm:pb-6 lg:gap-6 lg:px-6">
-            <div
-              className="relative flex-1 min-h-0 flex items-center justify-center px-12 sm:px-20 lg:px-14"
-              onClick={(event) => event.stopPropagation()}
-            >
+            <div className="relative flex-1 min-h-0 flex items-center justify-center px-12 sm:px-20 lg:px-14">
               {total > 1 && (
                 <>
                   <button
                     type="button"
-                    onClick={() => step(-1)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      step(-1);
+                    }}
                     aria-label={content.lightbox.previous}
                     className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
                   >
@@ -118,7 +121,10 @@ export function PhotoModal({
                   </button>
                   <button
                     type="button"
-                    onClick={() => step(1)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      step(1);
+                    }}
                     aria-label={content.lightbox.next}
                     className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors cursor-pointer"
                   >
@@ -152,7 +158,10 @@ function PhotoImage({ photo }: { photo: Photo }) {
   const meta = photo.meta;
 
   return (
-    <div className="relative flex items-center justify-center max-h-full max-w-full">
+    <div
+      className="relative flex items-center justify-center max-h-full max-w-full"
+      onClick={(event) => event.stopPropagation()}
+    >
       {meta?.blur !== undefined && (
         <div
           aria-hidden="true"
@@ -175,7 +184,7 @@ function PhotoImage({ photo }: { photo: Photo }) {
         animate={{ opacity: loaded ? 1 : 0, scale: 1 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
         onLoad={() => setLoaded(true)}
-        className="max-h-full max-w-full object-contain rounded-xl sm:rounded-2xl shadow-2xl"
+        className="max-h-[52vh] lg:max-h-[calc(100dvh-6.5rem)] max-w-full object-contain rounded-xl sm:rounded-2xl shadow-2xl"
       />
     </div>
   );

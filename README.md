@@ -49,6 +49,7 @@ All text lives in one file: `src/data/content.json`. Structure:
 | `photos` | Gallery heading, description, end card, empty state |
 | `about` | Page heading, quote, intro, numbered sections |
 | `contact` | Discord handle, descriptions, buttons, Discord and X URLs, user ID |
+| `lightbox` | Photo viewer labels (close, navigation, shot settings, file info) |
 | `footer` | Footer column labels and note |
 
 To change the Discord profile or X account, edit `contact.discordUrl` and `contact.xUrl`. The profile picture is `public/pfp.webp`, replace that file to update the avatar everywhere (sidebar, contact page, favicon).
