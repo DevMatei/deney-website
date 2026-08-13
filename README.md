@@ -1,99 +1,70 @@
 # deney | Photography
 
-A photography portfolio for deney. Static site, no backend, no database, no admin panel. Photos are committed to the repo by hand and the site is deployed to Vercel.
+A photography portfolio for deney. Static site, no backend, no database, no admin panel. Photos get committed to the repo by hand, the build turns them into optimized webp, and Vercel ships the result. Kept simple on purpose, the whole point is that adding a photo is just committing a file.
 
-## Tech stack
+## Stack
 
 - React 19 + Vite
-- Tailwind CSS v4 for styling, motion for animations
-- Custom design tokens as CSS variables in `src/index.css` (dark-first warm theme with amber accents)
-- Photo pipeline: EXIF extraction and image optimization at build time with sharp and exifr
+- Tailwind CSS v4, motion for animations
+- Design tokens as CSS variables in `src/index.css`, warm dark theme with amber accents
+- Photo pipeline runs at build time with sharp and exifr
 
-## Requirements
+## Running locally
 
-- Node.js 20 or newer
-- npm
-
-## Commands
+Needs Node 20 or newer and npm.
 
 | Command | What it does |
 | --- | --- |
 | `npm install` | Install dependencies |
-| `npm run dev` | Start the dev server at http://localhost:5173 |
+| `npm run dev` | Dev server at http://localhost:5173 |
 | `npm run exif` | Regenerate optimized photos and metadata from `src/assets/photos/` |
-| `npm run build` | Production build to `dist/` (runs the photo pipeline first) |
+| `npm run build` | Production build to `dist/`, runs the photo pipeline first |
 | `npm run preview` | Serve the production build locally |
 
 ## Adding photos
 
-1. Put the original photos in `src/assets/photos/` (jpg, jpeg, png, webp, avif, heic, tif, tiff all work; HEIC from phones is fine).
-2. Run `npm run dev` or `npm run build`. The pipeline runs automatically and:
-   - extracts EXIF metadata (camera, lens, exposure, date), GPS is always stripped
+1. Drop the originals into `src/assets/photos/`. jpg, jpeg, png, webp, avif, heic, tif and tiff all work, HEIC straight from a phone is fine.
+2. Run `npm run dev` or `npm run build`. The pipeline:
+   - reads EXIF metadata (camera, lens, exposure, date), GPS is always stripped
    - auto-rotates photos by their orientation tag
-   - writes optimized copies to `src/assets/generated/` (1200px long edge, webp quality 75, plus a 640px variant for the background rain and a blurred placeholder)
+   - writes optimized webp into `src/assets/generated/` (1200px long edge, quality 75, plus a 640px variant for the background rain and a small blurred placeholder)
    - writes `src/data/photoMetadata.json`
-3. Commit the originals in `src/assets/photos/` and the metadata file. Never commit `src/assets/generated/`, it is regenerated.
-4. To remove a photo, delete the file and rebuild. It disappears from the site.
+3. Commit the originals in `src/assets/photos/` and the metadata file. `src/assets/generated/` is regenerated every build, never commit it.
+4. Delete a photo from the folder, rebuild, and it disappears from the site.
 
-If a photo has no EXIF data (common after export from some apps), it still displays fine, it just has no metadata in the detail view.
+Photos without EXIF still display fine, they just have no metadata in the detail view.
 
-## Editing the content
+## Editing content
 
-All text lives in one file: `src/data/content.json`. Structure:
+All site copy lives in `src/data/content.json`, no component touching needed. That file covers the nav, home hero, gallery copy, about page, contact buttons, lightbox labels and the footer. The Discord and X links are `contact.discordUrl` and `contact.xUrl`. The avatar is `public/pfp.webp`, replacing that file updates the sidebar, the contact page and the favicon at once.
 
-| Key | Controls |
-| --- | --- |
-| `site` | Name, role, footer credit text and link |
-| `nav` | Navigation labels and routes |
-| `home` | Hero eyebrow, title, tagline, buttons, featured section, about preview |
-| `photos` | Gallery heading, description, end card, empty state |
-| `about` | Page heading, quote, intro, numbered sections |
-| `contact` | Discord handle, descriptions, buttons, Discord and X URLs, user ID |
-| `lightbox` | Photo viewer labels (close, navigation, shot settings, file info) |
-| `footer` | Footer column labels and note |
+## Deploying
 
-To change the Discord profile or X account, edit `contact.discordUrl` and `contact.xUrl`. The profile picture is `public/pfp.webp`, replace that file to update the avatar everywhere (sidebar, contact page, favicon).
+1. Push the repo to GitHub.
+2. Import it in Vercel. Framework preset Vite, build command `npm run build`, output directory `dist`. No environment variables needed.
+3. The site ships at the default `[project].vercel.app` URL.
 
-## Design tokens
+After the first deploy, check the domain in `public/sitemap.xml` and the sitemap line in `public/robots.txt`, update them if the URL differs.
 
-The theme is defined with CSS variables in `src/index.css`:
+Client-side routing is handled by `vercel.json`, nothing else needed.
 
-- `--primary-hue`, `--primary-chroma` and the related hue variables drive the whole amber palette in oklch color space. Change the hue to re-theme the site.
-- Light and dark schemes are defined in the `:root` and `.dark` blocks.
-- Typography uses Google Sans Flex (self-hosted in `public/fonts/`) with Roboto Flex as fallback, heavy weights and wide tracking for display text.
-
-## Deployment
-
-1. Push the repository to GitHub.
-2. In Vercel, import the repo. Framework preset: Vite. Build command: `npm run build`. Output directory: `dist`.
-3. The site ships at the default `[project].vercel.app` URL. No environment variables are needed.
-
-After the first deploy, update the base URL in two files to match the real domain:
-
-- `public/sitemap.xml` (currently uses `https://deney.vercel.app`)
-- the `Sitemap:` line in `public/robots.txt`
-
-If a custom domain is added later, update those files again.
-
-Client-side routing is handled by `vercel.json`, no extra configuration is needed.
-
-## Project structure
+## Structure
 
 ```
 src/
   assets/photos/       original photos, committed by hand
-  components/          UI components (cards, sidebar, nav, photo modal, waterfall)
+  components/          UI components (cards, sidebar, nav, photo viewer, waterfall)
   data/content.json    all user-facing copy
   data/photoMetadata.json  generated by the photo pipeline
   pages/               Home, Photos, About, Contact
   photos/              waterfall effect, photo helpers
-  theme/               theme context (light/dark/system)
-public/                favicon, profile picture, fonts, robots.txt, sitemap.xml
+  theme/               light/dark theme handling
+public/                favicon, avatar, fonts, robots.txt, sitemap.xml
 scripts/               photo pipeline
 ```
 
 ## Troubleshooting
 
 - Photos not appearing after adding files: run `npm run exif` and restart the dev server.
-- Weird metadata in the detail view: the source photos were likely stripped of EXIF before being added.
-- The waterfall looks static: the animation respects `prefers-reduced-motion`, disable reduced motion in the OS to see it run.
+- Missing metadata in the detail view: the source photos were stripped of EXIF before being added, nothing to fix in the code.
+- The waterfall looks static: it respects `prefers-reduced-motion`, disable reduced motion in the OS to see it run.
