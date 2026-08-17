@@ -1,7 +1,10 @@
-import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, rm, writeFile, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import exifr from 'exifr';
 import sharp from 'sharp';
+import convert from 'heic-convert';
+
+process.env.LIBHEIF_SECURITY_LIMITS = 'off';
 
 const PHOTOS_DIR = path.resolve('src/assets/photos');
 const GENERATED_DIR = path.resolve('src/assets/generated');
@@ -55,10 +58,26 @@ async function extractExif(file) {
       iptc: false,
       xmp: false,
       icc: false,
+      wholeFile: true,
     });
   } catch {
     return undefined;
   }
+}
+
+
+async function convertHeicToBuffer(file) {
+  const inputBuffer = await readFile(file);
+  const outputBuffer = await convert({
+    buffer: inputBuffer,
+    format: 'JPEG',
+    quality: 0.92,
+  });
+  return Buffer.from(outputBuffer);
+}
+
+function isSecurityLimitError(error) {
+  return /security limit/i.test(error?.message ?? '');
 }
 
 function toMetadata(relative, exifData, image, blur) {
@@ -105,6 +124,7 @@ await mkdir(GENERATED_DIR, { recursive: true });
 const files = await collectFiles(PHOTOS_DIR);
 const photos = [];
 let skipped = 0;
+let convertedFallback = 0;
 
 for (const file of files) {
   const relative = path.relative(PHOTOS_DIR, file);
@@ -113,7 +133,20 @@ for (const file of files) {
   const targetPath = path.join(GENERATED_DIR, targetName);
   try {
     await mkdir(path.dirname(targetPath), { recursive: true });
-    const image = await sharp(file)
+
+    let sharpInput = file;
+    try {
+      await sharp(sharpInput).metadata();
+    } catch (probeError) {
+      if (isSecurityLimitError(probeError)) {
+        sharpInput = await convertHeicToBuffer(file);
+        convertedFallback += 1;
+      } else {
+        throw probeError;
+      }
+    }
+
+    const image = await sharp(sharpInput)
       .rotate()
       .resize({
         width: MAX_EDGE,
@@ -123,14 +156,14 @@ for (const file of files) {
       })
       .webp({ quality: WEBP_QUALITY })
       .toFile(targetPath);
-    const blurBuffer = await sharp(file)
+    const blurBuffer = await sharp(sharpInput)
       .rotate()
       .resize({ width: 64, height: 64, fit: 'inside' })
       .webp({ quality: 35 })
       .toBuffer();
     const blur = `data:image/webp;base64,${blurBuffer.toString('base64')}`;
     const bandName = targetName.replace(/\.webp$/, '.band.webp');
-    await sharp(file)
+    await sharp(sharpInput)
       .rotate()
       .resize({ width: BAND_EDGE, height: BAND_EDGE, fit: 'inside', withoutEnlargement: true })
       .webp({ quality: BAND_QUALITY })
@@ -144,4 +177,4 @@ for (const file of files) {
 
 photos.sort((a, b) => a.file.localeCompare(b.file));
 await writeFile(OUT_FILE, `${JSON.stringify({ photos }, null, 2)}\n`);
-console.log(`photos: ${photos.length}, skipped: ${skipped}`);
+console.log(`photos: ${photos.length}, skipped: ${skipped}, motion-photo fallback used: ${convertedFallback}`);
