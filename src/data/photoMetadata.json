@@ -57,6 +57,20 @@
       "bandFile": "IMG_1248.band.webp"
     },
     {
+      "file": "IMG_1273_MP.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRgYBAABXRUJQVlA4IPoAAADwBwCdASowAEAAPv1urU6rJqQiMBVcAWAfiWIAxN5V2SlWUOkx0RORvzdUBaEN81ua69h3q/9F8yIf+gY2T4own+R9G1wlyQAA/hPmUc1/UZQNY67xngBaf0BJXhmonuJgRMG7HDM3EOkrSDgzx1thLDlgsd4lqN5ojDYYx51FfgSayFrkz64UwPEQ7iJJEa9d9CL6tfDmouXZadYbesmDS2PV1nCDsLbZlUvClPEqBs2b9FiyKeORY87TnkPVpwOBTx4fjjhidGwyk3CF7sklzvSmeBxY+clvzQqre1LCbd86CGfW9a3tZUE/vDDYVkQP/MrZX8VjwAAA",
+      "camera": "Apple iPhone 13",
+      "lens": "iPhone 13 back dual wide camera 5.1mm f/1.6",
+      "focalLength": 5.1,
+      "aperture": 1.6,
+      "shutter": 0.00819672131147541,
+      "iso": 100,
+      "takenAt": "2026-07-11T18:03:20.000Z",
+      "bandFile": "IMG_1273_MP.band.webp"
+    },
+    {
       "file": "IMG_1274.webp",
       "width": 900,
       "height": 1200,
@@ -64,11 +78,102 @@
       "bandFile": "IMG_1274.band.webp"
     },
     {
-      "file": "IMG_1421.webp",
+      "file": "IMG_1421_MP.webp",
       "width": 900,
       "height": 1200,
-      "blur": "data:image/webp;base64,UklGRuoAAABXRUJQVlA4IN4AAACQBwCdASowAEAAPvloqk6qpiOiNVgIAVAfCUAXYAgTA4T/sV+gZdFyjcyuWr6wLwNjp4e+RuBVH46gtNX+aCIc0u2NC8AA/FMcmGL+veH7pyaNUyqLw8K2tgslxcEVkHL1whJZNJKt8gVLc1w9/fB8prTnP6AKX23AXik2Ewvq6JYBLC+xTRQa2SY1BcYRG0Iw8HNRM1xhTNKiwyAG9Hh/mma29aAnMmvYQWxocrBH6jlK3KaKjOFsLxDEUc6jEnm96Hp2oZExZoADPww2P4wI47lku2GQXiqcVLMAAAA=",
-      "bandFile": "IMG_1421.band.webp"
+      "blur": "data:image/webp;base64,UklGRuIAAABXRUJQVlA4INYAAACQBwCdASowAEAAPvloq06qpiQiNVgIAVAfCUAYwIgTA5EeUWI3l9Uan0Um0HvH5FawRotHnsivx4X6dpl2vefbKnWu/BAA/FMcip/jy3xVmnj8HUuhQeFOvzV03bYB0vQEfGBZEc/skre6orelQVNOIpClNBnkHdhWBWkGrqW/MILn2pA5luO/b5UP7QRV7ZogV8Dkaf8P+/jXsxg+nPJ4oCAL3++fqDZ3z4OEetu1s/MxE26gCNWpwP2bTbeJU4UBLZna3r4ZCMGtLoCPNhnwQxT0AAAA",
+      "camera": "Apple iPhone 13",
+      "lens": "iPhone 13 back dual wide camera 5.1mm f/1.6",
+      "focalLength": 5.1,
+      "aperture": 1.6,
+      "shutter": 0.0012091898428053204,
+      "iso": 50,
+      "takenAt": "2026-08-07T17:08:53.000Z",
+      "bandFile": "IMG_1421_MP.band.webp"
+    },
+    {
+      "file": "IMG_6095_MP.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRjwBAABXRUJQVlA4IDABAADwCACdASowAEAAPvFkp06ppbSiNVYN+pAeCUAXlEAAY1Lbjb2XsSy7R8f1+QMYUC4LaPN95pIrGCUn8hYT+O9i54RqB9Hp8IL2Q5oM1m7CoAD+xkfiAZ0RfO3yd+ds8uhXrL76O3eIeTMOItfnu+zPvGNw8lCX/0e8mIyY6XpxHcFoAD/4jhMdBqnmb2Z55Jjjwk7+XlQVrDvcAsFmOBAmWqsrCQGrT+jtNj1RdMTjsp34w7yUkhaBFdHnC5spZGxB+oPdqHCXsvJ0OIsbK7453yKH3Nk6jLGWEviI35eUtfTrCJUh5tU9R1TedIdA/LElEVfb1tLDcT4TBsO2FLINS+M9guPfx2CYSgM37VX+smqXaSCbWHPZrCucXket5ABK+0wxUaBH2ZIbUtBC2AAA",
+      "camera": "Apple iPhone 13",
+      "lens": "iPhone 13 back dual wide camera 5.1mm f/1.6",
+      "focalLength": 5.1,
+      "aperture": 1.6,
+      "shutter": 0.0009302325581395349,
+      "iso": 50,
+      "takenAt": "2025-01-02T11:32:38.000Z",
+      "bandFile": "IMG_6095_MP.band.webp"
+    },
+    {
+      "file": "IMG_6099_MP.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRmoBAABXRUJQVlA4IF4BAAAQCQCdASowAEAAPv1qrE6rJi2prVmdsbAfiWgAvRPthhh5NN0um60VrCVCzapeJMFKntDx7l5stE0JBVj+EL//kr7l/qEl4S5GTLrAt7O4ZNwA/uD/0nZf87au7YSe/OCeoGKJlAav+uusbUWCFuUbch77RbvOzjSjtpe/OniymVoKQG6EqVd3kP7IBLyaqiwh4nt3NugdDqQ/Kx28jq+VFzsbq9QsQAM3ztuAnDTMwZ8BRfVt+KOW/JjBmV8H0JzoyIzIo63gONb0SKvi6F+N4WjNf2OtaVij1+srIxM4Zr8MCUlVI9eQtILQqNgc1/dwYIgIoknge1plbCpPRvJO/r2LpOoh1ryf2WuQOkKOwBJFJTyrSnuRsmghVpfTfJhX4M39wDXyUgZ7vifxmGcBb+awGpONw0pq4W9p3DMYVRq0z9KmlO1ecr4FxO5ejaIKWgMg3r7Tl2pr7wAAAA==",
+      "camera": "Apple iPhone 13",
+      "lens": "iPhone 13 back dual wide camera 5.1mm f/1.6",
+      "focalLength": 5.1,
+      "aperture": 1.6,
+      "shutter": 0.0031746031746031746,
+      "iso": 50,
+      "takenAt": "2025-01-02T11:36:51.000Z",
+      "bandFile": "IMG_6099_MP.band.webp"
+    },
+    {
+      "file": "IMG_7725_MP.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4IBQBAACQBwCdASowAEAAPwF2rlKrJyOzqrgKAnAgCUAZZgEATQ3Mc+l1vh2iCmKesF9EwtMdJQplS2jmE7fX/yPNb/slXDtwtuAA/uhUt/akf8XdiOMwB73pa4ayBp9SshahVbusUF71LpVCs79/HTYtaBYNsrejfSvHlReOeRMwlGTolBukilf5s37SAZj3SqoHAazyBp1llm3PY0cLqWzeAYLh9GYZbKBhdBeTvi7VNcBXxYXw50Da0mFP9CiwH341Z6ZvywyBdBaqrMGi4wYfhijFRtCe7RAP72pIUM2pcpthDeoPf7D5HLy8fJSSTz1vc8arzdM+e65KO7ap67w9RKsbSlwguaA4KFvSr5SQa6Kg2onxAAA=",
+      "camera": "Apple iPhone 13",
+      "lens": "iPhone 13 back dual wide camera 5.1mm f/1.6",
+      "focalLength": 5.1,
+      "aperture": 1.6,
+      "shutter": 0.0001709986320109439,
+      "iso": 50,
+      "takenAt": "2025-06-05T06:58:47.000Z",
+      "bandFile": "IMG_7725_MP.band.webp"
+    },
+    {
+      "file": "PXL_20260815_173838804.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADQBACdASowAEAAPwFsrE8rKyQiMrkoAWAgCWUAyNRJD6vhYdOn92lQWumxuc0tRAD+636OCo7JDVxQeNQmpLw0/WOkKi/JrswCGwZbsPe/hQ0fdzv6xxaG8EqbY1NybMW4TJAVnbbgZMlLiC0gskAAAAA=",
+      "camera": "Google Pixel 10",
+      "lens": "Pixel 10 back camera 4.53mm f/1.7",
+      "focalLength": 4.53,
+      "aperture": 1.7,
+      "shutter": 0.019049,
+      "iso": 206,
+      "takenAt": "2026-08-15T17:38:38.000Z",
+      "bandFile": "PXL_20260815_173838804.band.webp"
+    },
+    {
+      "file": "PXL_20260817_181720329.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAADwBQCdASowAEAAPwFytFQrJiUoqBVZyWAgCWUAu/AzZxe2LKxIHVCGtLxtV5CL+fcmjeg+aGVFwAD+8jdEBQ2IszUhzTAYTmUgO+qCE85juju6S7hVj6Md1tP3H4FbK+ifX5b3RXzGOY/xHHnFewOAE09SLQlQvuGZSAn+5AQRFsCbvICSAo77fP7ng0b0cMG9fyCvAgA=",
+      "camera": "Google Pixel 10",
+      "lens": "Pixel 10 back camera 14.2mm f/3.05",
+      "focalLength": 14.2,
+      "aperture": 3.05,
+      "shutter": 0.059989,
+      "iso": 1552,
+      "takenAt": "2026-08-17T18:17:20.000Z",
+      "bandFile": "PXL_20260817_181720329.band.webp"
+    },
+    {
+      "file": "PXL_20260818_051602108.webp",
+      "width": 900,
+      "height": 1200,
+      "blur": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACwBwCdASowAEAAPwFwq1ArJqOirVZskWAgCWVo/FzJjtiygNqy6Alwa1Kkf/4eGQdLUkr3f1w7HqcF55sbvZsSLRTL6YHAAP7KE1yDp8j1mvYYS/61Q5S4PfO554ywVyUp6Bg9x4hv5J9sjpnW8LK/QeQMSCpNvIpnsQFRmZVezAsm77oiIa4sCuZrORCrbFjKr3wnJlzE+Nnff98G/vhGyH4zuyp62pMiaBKRJRCJcj8dZthBi0FO6KsR21yyc2/azfHUQWwe0DWqGuhfR/G8eRV9bC50oPOpI77gJDAKjsvEot5tufVBTNLSH/ylOr+SOXx0BDkyCcNyO784yEjkfQAAAA==",
+      "camera": "Google Pixel 10",
+      "lens": "Pixel 10 back camera 14.2mm f/3.05",
+      "focalLength": 14.2,
+      "aperture": 3.05,
+      "shutter": 0.003525,
+      "iso": 84,
+      "takenAt": "2026-08-18T05:16:02.000Z",
+      "bandFile": "PXL_20260818_051602108.band.webp"
     }
   ]
 }
