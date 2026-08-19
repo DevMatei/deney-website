@@ -80,7 +80,7 @@ function isSecurityLimitError(error) {
   return /security limit/i.test(error?.message ?? '');
 }
 
-function toMetadata(relative, exifData, image, blur) {
+function toMetadata(relative, exifData, image, blur, caption) {
   const file = relative.replace(/\\/g, '/').replace(/\.[^/.]+$/, '') + '.webp';
   const entry = {
     file,
@@ -88,6 +88,9 @@ function toMetadata(relative, exifData, image, blur) {
     height: image.height,
     blur,
   };
+  if (typeof caption === 'string' && caption) {
+    entry.caption = caption;
+  }
   const make = typeof exifData?.Make === 'string' ? exifData.Make : undefined;
   const model = typeof exifData?.Model === 'string' ? exifData.Model : undefined;
   const camera = [make, model].filter(Boolean).join(' ').trim();
@@ -129,6 +132,13 @@ let convertedFallback = 0;
 for (const file of files) {
   const relative = path.relative(PHOTOS_DIR, file);
   const exifData = await extractExif(file);
+  const base = relative.replace(/\\/g, '/').replace(/\.[^/.]+$/, '');
+  let caption;
+  try {
+    caption = (await readFile(path.join(PHOTOS_DIR, base + '.txt'), 'utf8')).trim();
+  } catch {
+    caption = undefined;
+  }
   const targetName = relative.replace(/\\/g, '/').replace(/\.[^/.]+$/, '') + '.webp';
   const targetPath = path.join(GENERATED_DIR, targetName);
   try {
@@ -168,7 +178,7 @@ for (const file of files) {
       .resize({ width: BAND_EDGE, height: BAND_EDGE, fit: 'inside', withoutEnlargement: true })
       .webp({ quality: BAND_QUALITY })
       .toFile(path.join(GENERATED_DIR, bandName));
-    photos.push({ ...toMetadata(relative, exifData, image, blur), bandFile: bandName });
+    photos.push({ ...toMetadata(relative, exifData, image, blur, caption), bandFile: bandName });
   } catch (error) {
     skipped += 1;
     console.warn(`skipped ${relative}: ${error.message}`);

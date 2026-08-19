@@ -8,6 +8,7 @@ export interface PhotoMeta {
   width: number;
   height: number;
   blur?: string;
+  caption?: string;
   camera?: string;
   lens?: string;
   focalLength?: number;

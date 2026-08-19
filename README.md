@@ -34,6 +34,15 @@ Needs Node 20 or newer and npm.
 
 Photos without EXIF still display fine, they just have no metadata in the detail view.
 
+Captions are optional. Drop a `.txt` file in `src/assets/photos/` with the same name as the photo and whatever's inside becomes the caption, shown in the lightbox. No `.txt`, no caption.
+
+```
+IMG_1234.jpg
+IMG_1234.txt   the txt says: Sunset over the Dniester River
+```
+
+Workflow stays the same: add the photo, add the matching `.txt`, write the caption, deploy.
+
 ## Editing content
 
 All site copy lives in `src/data/content.json`, no component touching needed. That file covers the nav, home hero, gallery copy, about page, contact buttons, lightbox labels and the footer. The Discord and X links are `contact.discordUrl` and `contact.xUrl`. The avatar is `public/pfp.webp`, replacing that file updates the sidebar, the contact page and the favicon at once.

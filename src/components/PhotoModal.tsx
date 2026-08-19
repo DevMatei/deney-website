@@ -31,6 +31,7 @@ export function PhotoModal({
   const isOpen = photo !== null;
   const index = photo !== null ? photos.findIndex((p) => p.url === photo.url) : -1;
   const total = photos.length;
+  const caption = photo?.meta?.caption;
   const closeRef = useRef<HTMLButtonElement>(null);
   const openedFromRef = useRef<HTMLElement | null>(null);
 
@@ -133,6 +134,11 @@ export function PhotoModal({
                 </>
               )}
               <PhotoImage key={photo.url} photo={photo} />
+              {caption !== undefined && (
+                <p className="absolute bottom-4 left-1/2 z-10 w-full max-w-[540px] -translate-x-1/2 rounded-full bg-black/50 px-5 py-2 text-center text-sm font-bold text-white/95 backdrop-blur">
+                  {caption}
+                </p>
+              )}
             </div>
 
             <motion.aside
