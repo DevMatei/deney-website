@@ -70,7 +70,7 @@ export function WaterfallBand({
     <div
       ref={ref}
       className="relative overflow-hidden shrink-0"
-      style={{ height, backgroundColor: "var(--surface-variant)" }}
+      style={{ height }}
     >
       {ready && near && (
         <Waterfall photos={photos} onSelect={onSelect} paused={!inView || scrolling} />

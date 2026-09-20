@@ -8,7 +8,7 @@ const COLUMN_GAP = 6;
 const PHOTO_MARGIN = 6;
 const MIN_PHOTOS_PER_COLUMN = 4;
 const MAX_PHOTOS_PER_COLUMN = 6;
-const MAX_COLUMNS = 5;
+const MAX_COLUMNS = 10;
 
 interface ColumnConfig {
   photos: Photo[];
@@ -23,22 +23,14 @@ interface RandomColumn {
 }
 
 function useColumnCount() {
-  const [count, setCount] = useState(MAX_COLUMNS);
+  const [count, setCount] = useState(5);
   useEffect(() => {
-    const queries = [
-      window.matchMedia("(min-width: 1200px)"),
-      window.matchMedia("(min-width: 900px)"),
-      window.matchMedia("(min-width: 600px)"),
-    ];
     const update = () => {
-      if (queries[0].matches) setCount(MAX_COLUMNS);
-      else if (queries[1].matches) setCount(4);
-      else if (queries[2].matches) setCount(4);
-      else setCount(3);
+      setCount(Math.max(3, Math.min(10, Math.round(window.innerWidth / 340))));
     };
     update();
-    queries.forEach((q) => q.addEventListener("change", update));
-    return () => queries.forEach((q) => q.removeEventListener("change", update));
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
   return count;
 }
@@ -136,7 +128,7 @@ export function Waterfall({
   return (
     <div
       ref={gridRef}
-      className="absolute inset-y-0 left-1/2 w-full max-w-[1920px] -translate-x-1/2 grid overflow-hidden px-2 py-1"
+      className="absolute inset-0 grid overflow-hidden px-2 py-1"
       style={{
         gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
         gap: `${COLUMN_GAP}px`,

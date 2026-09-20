@@ -122,10 +122,9 @@ export function Sidebar() {
           padding: isMini ? "0.6rem" : "1.25rem",
           margin: "0.75rem",
           borderRadius: isMini ? "1.75rem" : "2rem",
-          backdropFilter: "blur(20px)",
         }}
         transition={{ type: "spring", stiffness: 220, damping: 38 }}
-        className="flex flex-col h-[calc(100dvh-1.5rem)] w-auto anim-gpu border-2 border-[var(--outline-variant)] bg-[var(--surface)]/85 shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]"
+        className="flex flex-col h-[calc(100dvh-1.5rem)] w-auto anim-gpu border-2 border-[var(--outline-variant)] bg-[var(--surface)] shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]"
       >
         <div
           className={cn(
