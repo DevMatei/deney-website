@@ -4,5 +4,5 @@ dist
 src/assets/generated
 *.tsbuildinfo
 assets
-/favicon.png
-/pfp.webp
+public/pfp.webp
+public/favicon.png

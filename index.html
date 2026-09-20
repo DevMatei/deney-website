@@ -1,13 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      try {
+        var deneySettings = JSON.parse(localStorage.getItem("deney-settings") || "{}");
+        var deneyMode = deneySettings.mode || "system";
+        var deneyDark =
+          deneyMode === "dark" ||
+          (deneyMode === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (deneyDark) document.documentElement.classList.add("dark");
+      } catch (e) {}
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Photography portfolio of deney: winter streets, night scenes, fog and available light." />
+    <meta name="description" content="Photography portfolio of deney: winter streets, night scenes, fog and available light, plus the occasional side project." />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#241c13" />
     <meta property="og:title" content="deney | Photography" />
-    <meta property="og:description" content="Photography portfolio of deney: winter streets, night scenes, fog and available light." />
+    <meta property="og:description" content="Photography portfolio of deney: winter streets, night scenes, fog and available light, plus the occasional side project." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/pfp.webp" />
     <meta name="twitter:card" content="summary" />
@@ -16,11 +27,12 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "deney",
-        "description": "Photographer shooting winter streets, night scenes, fog and available light.",
+        "description": "Photographer and occasional dev shooting winter streets, night scenes, fog and available light.",
         "image": "/pfp.webp",
         "sameAs": [
           "https://discord.com/users/1065304440694919178",
-          "https://x.com/deney_lol"
+          "https://x.com/deney_lol",
+          "https://github.com/deneyy"
         ]
       }
     </script>

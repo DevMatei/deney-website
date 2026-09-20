@@ -275,6 +275,7 @@ select:focus-visible,
 
 .rain-track {
   will-change: transform;
+  transform: translateZ(0);
 }
 
 .no-scrollbar {
@@ -287,10 +288,10 @@ select:focus-visible,
 
 @keyframes waterfall {
   from {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateY(-50%);
+    transform: translate3d(0, -50%, 0);
   }
 }
 
