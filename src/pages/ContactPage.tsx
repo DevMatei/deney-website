@@ -5,6 +5,7 @@ import { WaterfallBand } from "../photos/WaterfallBand";
 import { usePhotos } from "../photos/usePhotos";
 import type { Photo } from "../photos/usePhotos";
 import { ExternalLink } from "../components/Icons";
+import GitHubIcon from "../components/GitHubIcon";
 import XLogoIcon from "../components/XLogoIcon";
 import content from "../data/content.json";
 
@@ -57,6 +58,16 @@ export function ContactPage() {
           >
             <XLogoIcon className="w-4 h-4" />
             {content.contact.xButton}
+            <ExternalLink size={16} />
+          </a>
+          <a
+            href={content.contact.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-outline w-full"
+          >
+            <GitHubIcon className="w-4 h-4" />
+            {content.contact.githubButton}
             <ExternalLink size={16} />
           </a>
         </Card>

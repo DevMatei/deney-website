@@ -273,10 +273,6 @@ select:focus-visible,
   -webkit-backface-visibility: hidden;
 }
 
-.rain-track {
-  will-change: transform;
-}
-
 .no-scrollbar {
   scrollbar-width: none;
 }
@@ -287,10 +283,10 @@ select:focus-visible,
 
 @keyframes waterfall {
   from {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateY(-50%);
+    transform: translate3d(0, -50%, 0);
   }
 }
 

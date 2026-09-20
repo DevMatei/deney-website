@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Photo } from "./usePhotos";
 
-const MIN_DURATION = 18;
-const DURATION_SPREAD = 6;
+const MIN_DURATION = 34;
+const DURATION_SPREAD = 10;
 const GRID_PADDING = 16;
 const COLUMN_GAP = 6;
 const PHOTO_MARGIN = 6;
 const MIN_PHOTOS_PER_COLUMN = 4;
-const MAX_PHOTOS_PER_COLUMN = 12;
-const MAX_COLUMNS = 8;
+const MAX_PHOTOS_PER_COLUMN = 6;
+const MAX_COLUMNS = 10;
 
 interface ColumnConfig {
   photos: Photo[];
@@ -23,22 +23,14 @@ interface RandomColumn {
 }
 
 function useColumnCount() {
-  const [count, setCount] = useState(MAX_COLUMNS);
+  const [count, setCount] = useState(5);
   useEffect(() => {
-    const queries = [
-      window.matchMedia("(min-width: 1200px)"),
-      window.matchMedia("(min-width: 900px)"),
-      window.matchMedia("(min-width: 600px)"),
-    ];
     const update = () => {
-      if (queries[0].matches) setCount(MAX_COLUMNS);
-      else if (queries[1].matches) setCount(7);
-      else if (queries[2].matches) setCount(6);
-      else setCount(5);
+      setCount(Math.max(3, Math.min(10, Math.round(window.innerWidth / 340))));
     };
     update();
-    queries.forEach((q) => q.addEventListener("change", update));
-    return () => queries.forEach((q) => q.removeEventListener("change", update));
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
   return count;
 }
@@ -77,9 +69,11 @@ function sampleColumn(pool: Photo[], columnWidth: number, targetHeight: number):
 export function Waterfall({
   photos,
   onSelect,
+  paused = false,
 }: {
   photos: Photo[];
   onSelect: (photo: Photo) => void;
+  paused?: boolean;
 }) {
   const columnCount = useColumnCount();
   const gridRef = useRef<HTMLDivElement>(null);
@@ -141,11 +135,12 @@ export function Waterfall({
       }}
     >
       {columns.map((column, index) => (
-        <div key={index} className="relative overflow-hidden rounded-2xl">
+        <div key={index} className="relative overflow-hidden">
           <div
             className="rain-track flex flex-col"
             style={{
               animation: `waterfall ${column.duration}s linear ${column.delay}s infinite`,
+              animationPlayState: paused ? "paused" : "running",
             }}
           >
             {column.photos.map((photo) => (
@@ -176,7 +171,6 @@ function RainPhoto({
   photo: Photo;
   onSelect: (photo: Photo) => void;
 }) {
-  const [loaded, setLoaded] = useState(false);
   const meta = photo.meta;
   const ratio = meta?.width && meta?.height ? meta.width / meta.height : 3 / 2;
 
@@ -191,14 +185,12 @@ function RainPhoto({
       <img
         src={photo.bandUrl || photo.url}
         alt=""
-        loading="eager"
-        fetchPriority="high"
+        loading="lazy"
+        fetchPriority="low"
         decoding="async"
         width={meta?.width}
         height={meta?.height}
-        onLoad={() => setLoaded(true)}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ opacity: loaded ? 1 : 0, transition: "opacity 300ms ease" }}
       />
     </button>
   );

@@ -6,6 +6,7 @@ import { vibrate } from "../lib/vibration";
 import { useTheme } from "../theme/ThemeContext";
 import { Camera, ChevronLeft, ChevronRight, Home, Mail, User } from "./Icons";
 import DiscordIcon from "./DiscordIcon";
+import GitHubIcon from "./GitHubIcon";
 import XLogoIcon from "./XLogoIcon";
 import content from "../data/content.json";
 
@@ -121,10 +122,9 @@ export function Sidebar() {
           padding: isMini ? "0.6rem" : "1.25rem",
           margin: "0.75rem",
           borderRadius: isMini ? "1.75rem" : "2rem",
-          backdropFilter: "blur(20px)",
         }}
         transition={{ type: "spring", stiffness: 220, damping: 38 }}
-        className="flex flex-col h-[calc(100dvh-1.5rem)] w-auto anim-gpu border-2 border-[var(--outline-variant)] bg-[var(--surface)]/85 shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]"
+        className="flex flex-col h-[calc(100dvh-1.5rem)] w-auto anim-gpu border-2 border-[var(--outline-variant)] bg-[var(--surface)] shadow-[0_18px_50px_-18px_rgba(0,0,0,0.45)]"
       >
         <div
           className={cn(
@@ -140,12 +140,12 @@ export function Sidebar() {
           <motion.div
             animate={{ opacity: isMini ? 0 : 1, maxWidth: isMini ? 0 : 200 }}
             transition={{ type: "spring", stiffness: 280, damping: 34 }}
-            className="overflow-hidden whitespace-nowrap min-w-0"
+            className="overflow-hidden min-w-0"
           >
             <div className="font-display text-2xl font-black tracking-tight leading-none">
               {content.site.name}
             </div>
-            <div className="text-[10px] font-emphasis font-black uppercase tracking-[0.18em] opacity-60 mt-1.5">
+            <div className="text-[10px] font-emphasis font-black uppercase tracking-[0.14em] leading-relaxed opacity-60 mt-1.5">
               {content.site.role}
             </div>
           </motion.div>
@@ -195,6 +195,18 @@ export function Sidebar() {
               )}
             >
               <XLogoIcon className="w-5 h-5" />
+            </motion.button>
+            <motion.button
+              layout
+              whileTap={{ scale: 0.96 }}
+              onClick={() => window.open(content.contact.githubUrl, "_blank", "noreferrer")}
+              aria-label={content.contact.githubLabel}
+              className={cn(
+                "flex items-center justify-center rounded-2xl bg-[var(--surface-variant)] text-[var(--on-surface-variant)] hover:text-[var(--on-primary-container)] hover:bg-[var(--primary-container)] transition-colors cursor-pointer",
+                isMini ? "w-11 h-11" : "flex-1 py-3",
+              )}
+            >
+              <GitHubIcon className="w-5 h-5" />
             </motion.button>
           </div>
           <motion.button

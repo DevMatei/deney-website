@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "deney",
-    "role": "Photographer",
+    "role": "Photographer, occasional dev",
     "footer": {
       "prefix": "made by",
       "label": "devmatei.com",
@@ -25,7 +25,7 @@
     "hero": {
       "eyebrow": "Photography",
       "title": "deney",
-      "tagline": "walks around, takes photos",
+      "tagline": "walks around, takes photos, sometimes writes code",
       "primaryCta": "View photos",
       "secondaryCta": "About deney"
     },
@@ -34,7 +34,7 @@
     "featuredEmpty": "Photo coming soon",
     "aboutPreview": {
       "label": "About deney",
-      "body": "no real theme here, just whatever looked good that day. more on the about page if you're curious",
+      "body": "no real theme here, just whatever looked good that day. photos mostly, code sometimes. more on the about page if you're curious",
       "cta": "Read more"
     }
   },
@@ -55,7 +55,7 @@
     "title": "About",
     "description": "how the photos happen",
     "quote": "i just walk around and take pictures of stuff that looks good",
-    "intro": "deney is a photographer without a specific theme or plan, just someone who explores the city and takes photos of whatever catches his eye. no concept, no setup, no overthinking it",
+    "intro": "deney is a photographer without a specific theme or plan, just someone who explores the city and takes photos of whatever catches his eye. no concept, no setup, no overthinking it. occasionally writes code too",
     "sections": [
       {
         "heading": "Process",
@@ -64,6 +64,10 @@
       {
         "heading": "Why",
         "body": "no deep reason behind it, it's just something to do while out. some shots turn out better than others, this is the good ones"
+      },
+      {
+        "heading": "Code",
+        "body": "photos are the main thing, but sometimes there's code too. python scripts, a discord bot, that kind of thing. nothing serious, it's all on github, link is on the contact page"
       }
     ]
   },
@@ -76,6 +80,9 @@
     "xUrl": "https://x.com/deney_lol",
     "xLabel": "X",
     "xButton": "Follow on X",
+    "githubUrl": "https://github.com/deneyy",
+    "githubLabel": "GitHub",
+    "githubButton": "Follow on GitHub",
     "discordUrl": "https://discord.com/users/1065304440694919178",
     "discordUserId": "1065304440694919178"
   },
@@ -98,7 +105,7 @@
     "navigationLabel": "Navigation",
     "contactLabel": "Contact",
     "backToTop": "Back to top",
-    "note": "a photography portfolio, updated whenever there's something new to add"
+    "note": "photography and the occasional side project, updated whenever there's something new to add"
   },
   "photoAlt": "Photograph by deney"
 }
