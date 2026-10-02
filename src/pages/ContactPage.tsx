@@ -4,7 +4,7 @@ import { PhotoModal } from "../components/PhotoModal";
 import { WaterfallBand } from "../photos/WaterfallBand";
 import { usePhotos } from "../photos/usePhotos";
 import type { Photo } from "../photos/usePhotos";
-import { ExternalLink } from "../components/Icons";
+import { Coffee, ExternalLink } from "../components/Icons";
 import GitHubIcon from "../components/GitHubIcon";
 import XLogoIcon from "../components/XLogoIcon";
 import content from "../data/content.json";
@@ -68,6 +68,16 @@ export function ContactPage() {
           >
             <GitHubIcon className="w-4 h-4" />
             {content.contact.githubButton}
+            <ExternalLink size={16} />
+          </a>
+          <a
+            href={content.contact.kofiUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-outline w-full"
+          >
+            <Coffee size={16} />
+            {content.contact.kofiButton}
             <ExternalLink size={16} />
           </a>
         </Card>

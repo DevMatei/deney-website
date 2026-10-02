@@ -25,13 +25,13 @@ export function PhotosPage() {
 
       <div className="px-4 md:px-10 pt-8 md:pt-12 pb-6 w-full max-w-[1080px] mx-auto">
         {photos.length === 0 ? (
-          <div className="border-4 border-dashed border-[var(--outline-variant)] rounded-[2.4rem] p-12 text-center">
+          <div className="border border-dashed border-[var(--outline)] rounded-[28px] p-12 text-center">
             <p className="font-medium opacity-60">{content.photos.empty}</p>
           </div>
         ) : (
           <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 [column-fill:balance]">
             {photos.map((photo, index) => (
-              <div key={photo.url} className="mb-4 break-inside-avoid">
+              <div key={photo.url} className="photo-item mb-4 break-inside-avoid">
                 <PhotoCard
                   photo={photo}
                   onSelect={setSelected}
@@ -43,7 +43,7 @@ export function PhotosPage() {
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="mb-4 break-inside-avoid w-full rounded-3xl border-4 border-dashed border-[var(--outline-variant)] bg-[var(--surface-variant)] text-[var(--on-surface-variant)] p-8 flex flex-col items-center justify-center text-center gap-3 cursor-pointer hover:border-[var(--primary)] transition-colors"
+              className="mb-4 break-inside-avoid w-full rounded-[28px] bg-[var(--primary-container)] text-[var(--on-primary-container)] p-8 flex flex-col items-center justify-center text-center gap-3 cursor-pointer hover:brightness-105 active:scale-[0.98] transition-[filter,transform]"
               style={{ aspectRatio: "3 / 4" }}
             >
               <ArrowUp size={28} />
@@ -53,16 +53,18 @@ export function PhotosPage() {
               <div className="text-sm font-bold opacity-80 max-w-[220px]">
                 {content.photos.endCard.body}
               </div>
-              <div className="btn-secondary !px-5 !py-2 text-sm">
+              <div className="btn-primary !px-5 !py-2 text-sm">
                 {content.photos.endCard.button}
               </div>
             </button>
           </div>
         )}
         {photos.length > 0 && (
-          <p className="text-center text-xs font-bold uppercase tracking-widest opacity-50 mt-4 mb-2">
-            {photos.length} {content.photos.countSuffix}
-          </p>
+          <div className="flex justify-center mt-4 mb-2">
+            <span className="px-4 py-1.5 rounded-full bg-[var(--surface-container)] text-[var(--on-surface-variant)] text-xs font-bold uppercase tracking-widest">
+              {photos.length} {content.photos.countSuffix}
+            </span>
+          </div>
         )}
       </div>
 

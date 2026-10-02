@@ -7,6 +7,7 @@ import {
   ChevronLeft as LucideChevronLeft,
   ChevronRight as LucideChevronRight,
   Circle as LucideCircle,
+  Coffee as LucideCoffee,
   ExternalLink as LucideExternalLink,
   Home as LucideHome,
   Mail as LucideMail,
@@ -29,6 +30,7 @@ const GLYPHS: Record<string, LucideIcon> = {
   arrow_back: LucideArrowLeft,
   calendar: LucideCalendar,
   open_in_new: LucideExternalLink,
+  coffee: LucideCoffee,
 };
 
 export function createIcon(name: string) {
@@ -52,3 +54,4 @@ export const ArrowLeft = createIcon("arrow_back");
 export const ArrowRight = createIcon("arrow_forward");
 export const Calendar = createIcon("calendar");
 export const ExternalLink = createIcon("open_in_new");
+export const Coffee = createIcon("coffee");

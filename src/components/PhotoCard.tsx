@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "motion/react";
 import { cn } from "../lib/cn";
 import type { Photo } from "../photos/usePhotos";
 
@@ -26,14 +25,12 @@ export function PhotoCard({
   const aspect = ratio ?? naturalRatio ?? 3 / 4;
 
   return (
-    <motion.button
+    <button
       type="button"
-      whileHover={{ scale: 1.015 }}
-      whileTap={{ scale: 0.98 }}
       onClick={() => onSelect(photo)}
       aria-label={photo.alt}
       className={cn(
-        "photo-card group relative w-full overflow-hidden rounded-3xl border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)] cursor-pointer outline-none hover:border-[var(--primary)] transition-colors",
+        "photo-card group relative w-full overflow-hidden rounded-[28px] bg-[var(--surface-variant)] cursor-pointer outline-none",
         fill && "h-full",
       )}
       style={fill ? undefined : { aspectRatio: String(aspect) }}
@@ -44,10 +41,8 @@ export function PhotoCard({
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${meta.blur})`,
-            filter: "blur(16px) saturate(1.2)",
-            transform: "scale(1.15)",
             opacity: loaded ? 0 : 1,
-            transition: "opacity 300ms ease",
+            transition: "opacity 200ms ease",
           }}
         />
       )}
@@ -61,13 +56,14 @@ export function PhotoCard({
         height={meta?.height}
         onLoad={() => setLoaded(true)}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ opacity: loaded ? 1 : 0, transition: "opacity 300ms ease" }}
+        style={{ opacity: loaded ? 1 : 0, transition: "opacity 200ms ease" }}
       />
+      <span aria-hidden="true" className="photo-state absolute inset-0 pointer-events-none" />
       {label !== undefined && (
-        <span className="absolute bottom-3 left-3 z-10 px-2.5 py-1 rounded-full bg-[var(--surface)]/70 backdrop-blur text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+        <span className="absolute bottom-3 left-3 z-10 px-2.5 py-1 rounded-full bg-[var(--surface-container)] text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
           {label}
         </span>
       )}
-    </motion.button>
+    </button>
   );
 }

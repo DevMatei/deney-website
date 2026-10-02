@@ -36,7 +36,7 @@ async function collectFiles(dir) {
 
 async function extractExif(file) {
   try {
-    return await exifr.parse(file, {
+    return await exifr.parse(await readFile(file), {
       pick: [
         'Make',
         'Model',

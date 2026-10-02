@@ -224,35 +224,33 @@ select:focus-visible,
 
 @layer components {
   .panel {
-    @apply bg-[var(--surface-variant)] rounded-[2.4rem] p-10 transition-[border-color,background-color,box-shadow] duration-150 border-6 border-[var(--outline-variant)] hover:border-[var(--primary)] hover:shadow-2xl;
+    @apply bg-[var(--surface-variant)] rounded-[28px] p-8 md:p-10 transition-[border-color,box-shadow] duration-200 border border-[var(--outline-variant)] hover:border-[var(--outline)] hover:shadow-xl;
   }
 
   .btn-primary {
-    @apply bg-[var(--primary)] text-[var(--on-primary)] px-6 py-3 rounded-full font-semibold transition-[background-color,box-shadow,filter] duration-150 hover:shadow-lg hover:brightness-110 active:brightness-95 flex items-center justify-center gap-2;
+    @apply bg-[var(--primary)] text-[var(--on-primary)] px-6 py-3 rounded-full font-semibold transition-[box-shadow,filter] duration-150 hover:shadow-md flex items-center justify-center gap-2;
   }
 
   .btn-secondary {
-    @apply bg-[var(--primary-container)] text-[var(--on-primary-container)] px-6 py-3 rounded-full font-semibold transition-[background-color,box-shadow,filter] duration-150 hover:shadow-md hover:brightness-110 active:brightness-95 flex items-center justify-center gap-2;
+    @apply bg-[var(--primary-container)] text-[var(--on-primary-container)] px-6 py-3 rounded-full font-semibold transition-[box-shadow,filter] duration-150 hover:shadow-sm flex items-center justify-center gap-2;
   }
 
   .btn-outline {
-    @apply border-6 border-[var(--outline-variant)] text-[var(--on-surface-variant)] px-6 py-3 rounded-full font-semibold transition-[border-color,background-color,color,filter] duration-150 hover:border-[var(--primary)] hover:text-[var(--on-surface)] hover:brightness-110 active:brightness-95 flex items-center justify-center gap-2 bg-transparent;
+    @apply border border-[var(--outline)] text-[var(--primary)] px-6 py-3 rounded-full font-semibold transition-[background-color,color] duration-150 hover:bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] active:bg-[color-mix(in_srgb,var(--primary)_16%,transparent)] flex items-center justify-center gap-2 bg-transparent;
   }
 
   .btn-primary:hover,
-  .btn-secondary:hover,
-  .btn-outline:hover {
-    filter: brightness(1.12);
+  .btn-secondary:hover {
+    filter: brightness(1.08);
   }
 
   .btn-primary:active,
-  .btn-secondary:active,
-  .btn-outline:active {
+  .btn-secondary:active {
     filter: brightness(0.94);
   }
 
   .chip {
-    @apply px-4 py-2 bg-[var(--surface-variant)] text-[var(--on-surface-variant)] rounded-2xl font-black text-sm uppercase tracking-tighter border-6 border-[var(--outline-variant)] transition-[border-color,background-color,color] duration-150 hover:border-[var(--primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:scale-105 active:scale-95;
+    @apply px-4 py-2 bg-[var(--surface-variant)] text-[var(--on-surface-variant)] rounded-lg font-black text-sm uppercase tracking-tighter border border-[var(--outline)] transition-[background-color,color] duration-150 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] active:scale-95;
   }
 
   .page-heading {
@@ -262,15 +260,40 @@ select:focus-visible,
 }
 
 .photo-card {
-  @apply relative transition-colors isolate;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  @apply relative isolate;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .photo-card img {
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+}
+
+.photo-state {
+  background: var(--on-surface);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px color-mix(in srgb, black 30%, transparent);
+}
+
+.photo-card:hover .photo-state {
+  opacity: 0.08;
+}
+
+.photo-card:active {
+  transform: scale(0.98);
+}
+
+.photo-card:active .photo-state {
+  opacity: 0.12;
+}
+
+.photo-item {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
 }
 
 .no-scrollbar {
