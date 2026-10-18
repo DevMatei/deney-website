@@ -78,6 +78,23 @@ export default function App() {
                 {content.site.footer.label}
               </a>
             </span>
+            <nav
+              aria-label="tonering webring"
+              className="mt-3 flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-widest opacity-50"
+            >
+              <a href="https://ring.devmatei.com/prev/deney" aria-label="previous site in the webring" className="hover:opacity-100">
+                &larr;
+              </a>
+              <a href="https://ring.devmatei.com" target="_blank" rel="noreferrer" className="underline hover:opacity-100">
+                tonering
+              </a>
+              <a href="https://ring.devmatei.com/rand" aria-label="random site in the webring" className="hover:opacity-100">
+                &#9673;
+              </a>
+              <a href="https://ring.devmatei.com/next/deney" aria-label="next site in the webring" className="hover:opacity-100">
+                &rarr;
+              </a>
+            </nav>
           </footer>
         </main>
         <MobileNav
